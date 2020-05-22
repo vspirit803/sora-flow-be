@@ -5,9 +5,11 @@ import { AccountSchema } from './account.schema';
 import { AccountsService } from './accounts.service';
 
 @Module({
-  imports:[MongooseModule.forFeature([{ name: 'Account', schema: AccountSchema }])],
+  imports: [
+    MongooseModule.forFeature([{ name: 'Account', schema: AccountSchema }]),
+  ],
   controllers: [AccountsController],
   providers: [AccountsService],
-  exports:[AccountsService]
+  exports: [AccountsService],
 })
 export class AccountsModule {}
