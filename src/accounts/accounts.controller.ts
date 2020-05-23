@@ -9,11 +9,10 @@ import {
   UsePipes,
   Query,
 } from '@nestjs/common';
-import { CreateAccountDto } from './create-account.dto';
+import { CreateAccountDto,QueryAccountDto } from './dto';
 import { AccountsService } from './accounts.service';
 import { Account } from './account.schema';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { QueryAccountDto } from './query-account.dts.ts';
 
 @UsePipes(
   new ValidationPipe({
