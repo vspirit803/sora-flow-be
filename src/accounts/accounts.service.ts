@@ -23,6 +23,6 @@ export class AccountsService {
   }
 
   async findOne(id: string): Promise<Account | undefined> {
-    return this.accountModel.findOne({ id }).exec();
+    return this.accountModel.findOne({ _id: id }).exec();
   }
 }
