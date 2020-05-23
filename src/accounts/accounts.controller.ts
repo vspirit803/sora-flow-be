@@ -1,18 +1,19 @@
 import {
+  Body,
   Controller,
   Get,
-  Post,
-  Body,
   Param,
-  UseGuards,
-  ValidationPipe,
-  UsePipes,
+  Post,
   Query,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
-import { CreateAccountDto,QueryAccountDto } from './dto';
-import { AccountsService } from './accounts.service';
-import { Account } from './account.schema';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+
+import { Account } from './account.schema';
+import { AccountsService } from './accounts.service';
+import { CreateAccountDto, QueryAccountDto } from './dto';
 
 @UsePipes(
   new ValidationPipe({

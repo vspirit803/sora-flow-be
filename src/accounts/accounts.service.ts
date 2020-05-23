@@ -1,6 +1,7 @@
-import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
 import { Account } from './account.schema';
 import { CreateAccountDto, QueryAccountDto } from './dto';
 
