@@ -40,7 +40,6 @@ export class AccountsController {
     @Body()
     createAccountDto: CreateAccountDto,
   ) {
-    // console.log(createAccountDto);
     await this.accountsService.create(createAccountDto);
   }
 

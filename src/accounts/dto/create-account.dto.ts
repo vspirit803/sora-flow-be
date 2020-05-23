@@ -7,6 +7,6 @@ export class CreateAccountDto {
   readonly name: string;
 
   @IsString()
-  @Expose({ toClassOnly: true })
+  @Expose()
   readonly password: string;
 }

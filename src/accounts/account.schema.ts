@@ -8,6 +8,9 @@ export class Account extends Document {
 
   @Prop({ select: false })
   password: string;
+
+  @Prop({ required: false, select: false })
+  __v: number;
 }
 
 export const AccountSchema = SchemaFactory.createForClass(Account);

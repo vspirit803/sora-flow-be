@@ -21,6 +21,7 @@ export class AccountsService {
   async findOneByName(name: string): Promise<Account | undefined> {
     return this.accountModel.findOne({ name }).exec();
   }
+
   async findOne(id: string): Promise<Account | undefined> {
     return this.accountModel.findOne({ id }).exec();
   }
