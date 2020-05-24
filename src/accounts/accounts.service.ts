@@ -4,6 +4,8 @@ import { Model } from 'mongoose';
 
 import { Account } from './account.schema';
 import { CreateAccountDto, QueryAccountDto } from './dto';
+import { DeleteAccountDto } from './dto/delete-account.dto';
+import { PatchAccountDto } from './dto/patch-account.dto';
 
 @Injectable()
 export class AccountsService {
@@ -12,6 +14,16 @@ export class AccountsService {
   async create(createAccountDto: CreateAccountDto): Promise<Account> {
     const createdAccount = new this.accountModel(createAccountDto);
     return createdAccount.save();
+  }
+
+  async updateOne(patchAccountDto: PatchAccountDto) {
+    const { id } = patchAccountDto;
+    await this.accountModel.updateOne({ _id: id }, patchAccountDto);
+  }
+
+  async deleteOne(deleteAccountDto: DeleteAccountDto) {
+    const { id } = deleteAccountDto;
+    await this.accountModel.deleteOne({ _id: id });
   }
 
   async findAll(query: QueryAccountDto): Promise<Account[]> {

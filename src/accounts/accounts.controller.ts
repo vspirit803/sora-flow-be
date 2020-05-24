@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -15,6 +17,8 @@ import { ExcludeUndefinedPipe } from '../Pipes/excludeUndefined.pipe';
 import { Account } from './account.schema';
 import { AccountsService } from './accounts.service';
 import { CreateAccountDto, QueryAccountDto } from './dto';
+import { DeleteAccountDto } from './dto/delete-account.dto';
+import { PatchAccountDto } from './dto/patch-account.dto';
 
 @UsePipes(
   new ValidationPipe({
@@ -43,5 +47,16 @@ export class AccountsController {
     createAccountDto: CreateAccountDto,
   ) {
     await this.accountsService.create(createAccountDto);
+  }
+
+  @Patch()
+  @UsePipes(ExcludeUndefinedPipe)
+  async updateOne(@Body() patchAccountDto: PatchAccountDto) {
+    await this.accountsService.updateOne(patchAccountDto);
+  }
+
+  @Delete()
+  async deleteOne(@Body() deleteAccountDto: DeleteAccountDto) {
+    await this.accountsService.deleteOne(deleteAccountDto);
   }
 }
