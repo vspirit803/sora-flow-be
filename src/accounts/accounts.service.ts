@@ -18,8 +18,11 @@ export class AccountsService {
     return this.accountModel.find(query).exec();
   }
 
-  async findOneByName(name: string): Promise<Account | undefined> {
-    return this.accountModel.findOne({ name }).exec();
+  async findOneByNamePassword(
+    name: string,
+    password: string,
+  ): Promise<Account | undefined> {
+    return this.accountModel.findOne({ name, password }).exec();
   }
 
   async findOne(id: string): Promise<Account | undefined> {

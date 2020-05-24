@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { ExcludeUndefinedPipe } from '../Pipes/excludeUndefined.pipe';
 import { Account } from './account.schema';
 import { AccountsService } from './accounts.service';
 import { CreateAccountDto, QueryAccountDto } from './dto';
@@ -26,6 +27,7 @@ import { CreateAccountDto, QueryAccountDto } from './dto';
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
   @Get()
+  @UsePipes(ExcludeUndefinedPipe)
   async findAll(@Query() query: QueryAccountDto): Promise<Account[]> {
     return this.accountsService.findAll(query);
   }
@@ -41,11 +43,5 @@ export class AccountsController {
     createAccountDto: CreateAccountDto,
   ) {
     await this.accountsService.create(createAccountDto);
-  }
-
-  async findOneByName(
-    @Param('name') name: string,
-  ): Promise<Account | undefined> {
-    return this.accountsService.findOneByName(name);
   }
 }
