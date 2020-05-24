@@ -16,9 +16,12 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ExcludeUndefinedPipe } from '../Pipes/excludeUndefined.pipe';
 import { Account } from './account.schema';
 import { AccountsService } from './accounts.service';
-import { CreateAccountDto, QueryAccountDto } from './dto';
-import { DeleteAccountDto } from './dto/delete-account.dto';
-import { PatchAccountDto } from './dto/patch-account.dto';
+import {
+  CreateAccountDto,
+  DeleteAccountDto,
+  PatchAccountDto,
+  QueryAccountDto,
+} from './dto';
 
 @UsePipes(
   new ValidationPipe({

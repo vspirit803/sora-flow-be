@@ -3,9 +3,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Account } from './account.schema';
-import { CreateAccountDto, QueryAccountDto } from './dto';
-import { DeleteAccountDto } from './dto/delete-account.dto';
-import { PatchAccountDto } from './dto/patch-account.dto';
+import {
+  CreateAccountDto,
+  DeleteAccountDto,
+  PatchAccountDto,
+  QueryAccountDto,
+} from './dto';
 
 @Injectable()
 export class AccountsService {
