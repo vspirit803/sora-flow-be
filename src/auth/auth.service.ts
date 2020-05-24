@@ -10,17 +10,18 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateAccount(name: string, pass: string): Promise<any> {
+  async validateAccount(name: string, password: string): Promise<any> {
     // 管理员账号特殊处理
-    if (name === 'admin' && pass === '12345678!@#$%^&*') {
+    if (name === 'admin' && password === '12345678!@#$%^&*') {
       return { name: 'admin' };
     }
 
-    const user = await this.accountsService.findOneByName(name);
-    if (user && user.password === pass) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password, ...result } = user.toJSON();
-      return result;
+    const user = await this.accountsService.findOneByNamePassword(
+      name,
+      password,
+    );
+    if (user) {
+      return user;
     }
     return null;
   }
