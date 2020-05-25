@@ -2,7 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { CreateRoleDto, QueryRoleDto } from './dto';
+import {
+  CreateRoleDto,
+  DeleteRoleDto,
+  QueryRoleDto,
+  UpdateRoleDto,
+} from './dto';
 import { Role } from './role.schema';
 
 @Injectable()
@@ -20,5 +25,15 @@ export class RolesService {
 
   async findOne(id: string): Promise<Role | undefined> {
     return this.roleModel.findOne({ _id: id }).exec();
+  }
+
+  async updateOne(updateRoleDto: UpdateRoleDto) {
+    const { id } = updateRoleDto;
+    await this.roleModel.updateOne({ _id: id }, updateRoleDto);
+  }
+
+  async deleteOne(deleteRoleDto: DeleteRoleDto) {
+    const { id } = deleteRoleDto;
+    await this.roleModel.deleteOne({ _id: id });
   }
 }
