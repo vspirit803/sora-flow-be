@@ -6,7 +6,7 @@ import { Account } from './account.schema';
 import {
   CreateAccountDto,
   DeleteAccountDto,
-  PatchAccountDto,
+  UpdateAccountDto,
   QueryAccountDto,
 } from './dto';
 
@@ -19,9 +19,9 @@ export class AccountsService {
     return createdAccount.save();
   }
 
-  async updateOne(patchAccountDto: PatchAccountDto) {
-    const { id } = patchAccountDto;
-    await this.accountModel.updateOne({ _id: id }, patchAccountDto);
+  async updateOne(updateAccountDto: UpdateAccountDto) {
+    const { id } = updateAccountDto;
+    await this.accountModel.updateOne({ _id: id }, updateAccountDto);
   }
 
   async deleteOne(deleteAccountDto: DeleteAccountDto) {
