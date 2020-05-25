@@ -40,10 +40,16 @@ export class AccountsService {
     name: string,
     password: string,
   ): Promise<Account | undefined> {
-    return this.accountModel.findOne({ name, password }).exec();
+    return this.accountModel
+      .findOne({ name, password })
+      .populate('role')
+      .exec();
   }
 
   async findOne(id: string): Promise<Account | undefined> {
-    return this.accountModel.findOne({ _id: id }).exec();
+    return this.accountModel
+      .findOne({ _id: id })
+      .populate('role')
+      .exec();
   }
 }
