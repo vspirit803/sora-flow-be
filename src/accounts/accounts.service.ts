@@ -6,8 +6,8 @@ import { Account } from './account.schema';
 import {
   CreateAccountDto,
   DeleteAccountDto,
-  UpdateAccountDto,
   QueryAccountDto,
+  UpdateAccountDto,
 } from './dto';
 
 @Injectable()

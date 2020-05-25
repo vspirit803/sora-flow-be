@@ -19,8 +19,8 @@ import { AccountsService } from './accounts.service';
 import {
   CreateAccountDto,
   DeleteAccountDto,
-  UpdateAccountDto,
   QueryAccountDto,
+  UpdateAccountDto,
 } from './dto';
 
 @UsePipes(
