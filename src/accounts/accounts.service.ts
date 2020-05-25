@@ -6,8 +6,8 @@ import { Account } from './account.schema';
 import {
   CreateAccountDto,
   DeleteAccountDto,
-  PatchAccountDto,
   QueryAccountDto,
+  UpdateAccountDto,
 } from './dto';
 
 @Injectable()
@@ -19,9 +19,9 @@ export class AccountsService {
     return createdAccount.save();
   }
 
-  async updateOne(patchAccountDto: PatchAccountDto) {
-    const { id } = patchAccountDto;
-    await this.accountModel.updateOne({ _id: id }, patchAccountDto);
+  async updateOne(updateAccountDto: UpdateAccountDto) {
+    const { id } = updateAccountDto;
+    await this.accountModel.updateOne({ _id: id }, updateAccountDto);
   }
 
   async deleteOne(deleteAccountDto: DeleteAccountDto) {
@@ -30,7 +30,10 @@ export class AccountsService {
   }
 
   async findAll(query: QueryAccountDto): Promise<Account[]> {
-    return this.accountModel.find(query).exec();
+    return this.accountModel
+      .find(query)
+      .populate('role')
+      .exec();
   }
 
   async findOneByNamePassword(

@@ -19,8 +19,8 @@ import { AccountsService } from './accounts.service';
 import {
   CreateAccountDto,
   DeleteAccountDto,
-  PatchAccountDto,
   QueryAccountDto,
+  UpdateAccountDto,
 } from './dto';
 
 @UsePipes(
@@ -54,8 +54,8 @@ export class AccountsController {
 
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
-  async updateOne(@Body() patchAccountDto: PatchAccountDto) {
-    await this.accountsService.updateOne(patchAccountDto);
+  async updateOne(@Body() updateAccountDto: UpdateAccountDto) {
+    await this.accountsService.updateOne(updateAccountDto);
   }
 
   @Delete()
