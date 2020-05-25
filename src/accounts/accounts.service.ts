@@ -30,7 +30,10 @@ export class AccountsService {
   }
 
   async findAll(query: QueryAccountDto): Promise<Account[]> {
-    return this.accountModel.find(query).exec();
+    return this.accountModel
+      .find(query)
+      .populate('role')
+      .exec();
   }
 
   async findOneByNamePassword(
