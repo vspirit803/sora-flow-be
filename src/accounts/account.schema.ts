@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema({
-  toJSON: { virtuals: true },
+  toJSON: { getters: true, virtuals: false },
 })
 export class Account extends Document {
   @Prop({ select: false })
@@ -19,6 +19,13 @@ export class Account extends Document {
 
   @Prop()
   roleId: string;
+
+  @Prop({
+    get: function () {
+      return this.role.name;
+    },
+  })
+  roleName: string;
 }
 
 export const AccountSchema = SchemaFactory.createForClass(Account);
