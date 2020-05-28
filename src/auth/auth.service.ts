@@ -30,8 +30,8 @@ export class AuthService {
     const payload = {
       name: user.name,
       sub: user._id,
-      roleId: user.role._id,
-      roleName: user.role.text,
+      roleId: user.roleId,
+      roleName: user.roleName,
     };
     return {
       // eslint-disable-next-line @typescript-eslint/camelcase

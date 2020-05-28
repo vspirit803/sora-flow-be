@@ -5,9 +5,6 @@ import { Document } from 'mongoose';
   toJSON: { getters: true, virtuals: false },
 })
 export class Account extends Document {
-  @Prop({ select: false })
-  id: string;
-
   @Prop()
   name: string;
 
