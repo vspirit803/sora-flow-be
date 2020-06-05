@@ -9,4 +9,8 @@ export class CreateAccountDto {
   @IsString()
   @Expose()
   readonly password: string;
+
+  @IsString()
+  @Expose()
+  readonly roleId: string;
 }
