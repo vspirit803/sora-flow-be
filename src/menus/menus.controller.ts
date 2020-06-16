@@ -7,10 +7,12 @@ import {
   Post,
   Query,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { LoggingInterceptor } from 'src/Interceptors/logging.interceptor';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
 
 import {
@@ -31,6 +33,8 @@ import { MenusService } from './menus.service';
 @Controller('menus')
 export class MenusController {
   constructor(private readonly menusService: MenusService) {}
+
+  @UseInterceptors(LoggingInterceptor)
   @Get()
   async findAll(@Query() query: QueryMenuDto) {
     return this.menusService.findAll(query);

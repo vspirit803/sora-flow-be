@@ -14,6 +14,7 @@ import { MenuTreeItem, transformToTree } from './transformToTree';
 @Injectable()
 export class MenusService {
   constructor(@InjectModel('Menu') private menuModel: Model<Menu>) {}
+
   async findAll(query: QueryMenuDto): Promise<MenuTreeItem[]> {
     const { id, name } = query;
     const condition = [];
