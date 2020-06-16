@@ -1,5 +1,4 @@
 import {
-  BadGatewayException,
   CallHandler,
   ExecutionContext,
   Injectable,
@@ -9,13 +8,20 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 @Injectable()
-export class LoggingInterceptor implements NestInterceptor {
+export class LogOperateInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const now = Date.now();
+    const { body, method, url } = context.switchToHttp().getRequest();
+
+    const data = { body, method, url, status: undefined };
+
     return next.handle().pipe(
-      tap(() => console.log(context.getArgs())),
+      tap(() => {
+        data.status = 'success';
+        console.log(data);
+      }),
       catchError((err) => {
-        console.log('发生了错误');
+        data.status = 'failed';
+        console.log(data);
         return throwError(err);
       }),
     );

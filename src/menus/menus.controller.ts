@@ -12,7 +12,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { LoggingInterceptor } from 'src/Interceptors/logging.interceptor';
+import { LogOperateInterceptor } from 'src/Interceptors/log.operate.interceptor';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
 
 import {
@@ -34,7 +34,6 @@ import { MenusService } from './menus.service';
 export class MenusController {
   constructor(private readonly menusService: MenusService) {}
 
-  @UseInterceptors(LoggingInterceptor)
   @Get()
   async findAll(@Query() query: QueryMenuDto) {
     return this.menusService.findAll(query);
@@ -51,6 +50,7 @@ export class MenusController {
 
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
+  @UseInterceptors(LogOperateInterceptor)
   async updateOne(@Body() updateMenuDto: UpdateMenuDto) {
     await this.menusService.updateOne(updateMenuDto);
   }
