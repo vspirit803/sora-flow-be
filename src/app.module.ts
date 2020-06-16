@@ -10,6 +10,7 @@ import { LoggerModule } from './logger/logger.module';
 import { LoggerLoginMiddleware } from './Middlewares/logger.login.middleware';
 import { LoggerMiddleware } from './Middlewares/logger.middleware';
 import { RolesModule } from './roles/roles.module';
+import { MenusModule } from './menus/menus.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { RolesModule } from './roles/roles.module';
     AuthModule,
     RolesModule,
     LoggerModule,
+    MenusModule,
   ],
   controllers: [AppController],
   providers: [AppService],
