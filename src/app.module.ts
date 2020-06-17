@@ -7,10 +7,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { LoggerModule } from './logger/logger.module';
+import { MenusModule } from './menus/menus.module';
 import { LoggerLoginMiddleware } from './Middlewares/logger.login.middleware';
 import { LoggerMiddleware } from './Middlewares/logger.middleware';
 import { RolesModule } from './roles/roles.module';
-import { MenusModule } from './menus/menus.module';
 
 @Module({
   imports: [

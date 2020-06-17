@@ -6,13 +6,26 @@ import {
 } from '@nestjs/common';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { LoggerService } from 'src/logger/logger.service';
 
 @Injectable()
 export class LogOperateInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const { body, method, url } = context.switchToHttp().getRequest();
+  // constructor(public operateName: string) {}
+  constructor(private readonly loggerService: LoggerService) {}
 
-    const data = { body, method, url, status: undefined };
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    const { body, method, url, user } = context.switchToHttp().getRequest();
+    console.log(this.loggerService);
+    const data = {
+      time: new Date(),
+      // operateName: this.operateName,
+      body,
+      method,
+      url,
+      user,
+      status: undefined,
+      response: undefined,
+    };
 
     return next.handle().pipe(
       tap(() => {
@@ -21,6 +34,7 @@ export class LogOperateInterceptor implements NestInterceptor {
       }),
       catchError((err) => {
         data.status = 'failed';
+        data.response = err.response;
         console.log(data);
         return throwError(err);
       }),

@@ -41,6 +41,7 @@ export class MenusController {
 
   @Post()
   @UsePipes(ExcludeUndefinedPipe)
+  @UseInterceptors(LogOperateInterceptor)
   async create(
     @Body()
     createMenuDto: CreateMenuDto,
@@ -56,6 +57,7 @@ export class MenusController {
   }
 
   @Delete()
+  @UseInterceptors(LogOperateInterceptor)
   async deleteOne(@Body() deleteMenuDto: DeleteMenuDto) {
     await this.menusService.deleteOne(deleteMenuDto);
   }
