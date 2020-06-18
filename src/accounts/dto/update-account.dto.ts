@@ -3,7 +3,7 @@ import { IsMongoId, IsOptional, IsString } from 'class-validator';
 
 export class UpdateAccountDto {
   @IsString()
-  @Expose()
+  @IsMongoId()
   readonly id: string;
 
   @IsOptional()
