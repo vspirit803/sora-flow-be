@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { OperateLogSchema } from './operate-log.schema';
 import { OperateLogsController } from './operate-logs.controller';
 import { OperateLogsService } from './operate-logs.service';
 
+@Global()
 @Module({
   imports: [
     MongooseModule.forFeature([
