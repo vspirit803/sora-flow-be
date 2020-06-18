@@ -5,10 +5,10 @@ export class QueryRoleDto {
   @IsOptional()
   @Expose()
   @IsString()
-  readonly name: string;
+  readonly name?: string;
 
   @IsOptional()
   @Expose()
   @IsString()
-  readonly text: string;
+  readonly text?: string;
 }

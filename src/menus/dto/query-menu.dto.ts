@@ -5,10 +5,10 @@ export class QueryMenuDto {
   @IsOptional()
   @IsMongoId()
   @Expose()
-  readonly id: string;
+  readonly id?: string;
 
   @IsOptional()
   @IsString()
   @Expose()
-  readonly name: string;
+  readonly name?: string;
 }

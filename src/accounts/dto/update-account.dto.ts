@@ -9,15 +9,15 @@ export class UpdateAccountDto {
   @IsOptional()
   @IsString()
   @Expose()
-  readonly name: string;
+  readonly name?: string;
 
   @IsOptional()
   @IsString()
   @Expose()
-  readonly password: string;
+  readonly password?: string;
 
   @IsOptional()
   @IsMongoId()
   @Expose()
-  readonly roleId: string;
+  readonly roleId?: string;
 }

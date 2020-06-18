@@ -5,5 +5,5 @@ export class QueryAccountDto {
   @IsOptional()
   @IsString()
   @Expose()
-  readonly name: string;
+  readonly name?: string;
 }
