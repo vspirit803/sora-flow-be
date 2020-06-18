@@ -7,10 +7,13 @@ import {
   Patch,
   Post,
   Query,
+  SetMetadata,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { OperateLogInterceptor } from 'src/Interceptors/operate-log.interceptor';
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ExcludeUndefinedPipe } from '../Pipes/excludeUndefined.pipe';
@@ -45,6 +48,8 @@ export class AccountsController {
   }
 
   @Post()
+  @SetMetadata('operateTarget', '账号')
+  @UseInterceptors(OperateLogInterceptor)
   async create(
     @Body()
     createAccountDto: CreateAccountDto,
@@ -54,11 +59,15 @@ export class AccountsController {
 
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
+  @SetMetadata('operateTarget', '账号')
+  @UseInterceptors(OperateLogInterceptor)
   async updateOne(@Body() updateAccountDto: UpdateAccountDto) {
     await this.accountsService.updateOne(updateAccountDto);
   }
 
   @Delete()
+  @SetMetadata('operateTarget', '账号')
+  @UseInterceptors(OperateLogInterceptor)
   async deleteOne(@Body() deleteAccountDto: DeleteAccountDto) {
     await this.accountsService.deleteOne(deleteAccountDto);
   }
