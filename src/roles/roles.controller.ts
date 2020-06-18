@@ -11,6 +11,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
 
 import { ExcludeUndefinedPipe } from '../Pipes/excludeUndefined.pipe';
 import {
@@ -39,6 +40,7 @@ export class RolesController {
   }
 
   @Post()
+  @UseOperateLog('角色')
   async create(
     @Body()
     createRoleDto: CreateRoleDto,
@@ -48,11 +50,13 @@ export class RolesController {
 
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
+  @UseOperateLog('角色')
   async updateOne(@Body() updateRoleDto: UpdateRoleDto) {
     await this.rolesService.updateOne(updateRoleDto);
   }
 
   @Delete()
+  @UseOperateLog('角色')
   async deleteOne(@Body() deleteRoleDto: DeleteRoleDto) {
     await this.rolesService.deleteOne(deleteRoleDto);
   }

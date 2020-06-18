@@ -6,14 +6,12 @@ import {
   Patch,
   Post,
   Query,
-  SetMetadata,
   UseGuards,
-  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { OperateLogInterceptor } from 'src/Interceptors/operate-log.interceptor';
+import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
 
 import {
@@ -42,8 +40,7 @@ export class MenusController {
 
   @Post()
   @UsePipes(ExcludeUndefinedPipe)
-  @UseInterceptors(OperateLogInterceptor)
-  @SetMetadata('operateTarget', '菜单')
+  @UseOperateLog('菜单')
   async create(
     @Body()
     createMenuDto: CreateMenuDto,
@@ -53,15 +50,13 @@ export class MenusController {
 
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
-  @UseInterceptors(OperateLogInterceptor)
-  @SetMetadata('operateTarget', '菜单')
+  @UseOperateLog('菜单')
   async updateOne(@Body() updateMenuDto: UpdateMenuDto) {
     await this.menusService.updateOne(updateMenuDto);
   }
 
   @Delete()
-  @UseInterceptors(OperateLogInterceptor)
-  @SetMetadata('operateTarget', '菜单')
+  @UseOperateLog('菜单')
   async deleteOne(@Body() deleteMenuDto: DeleteMenuDto) {
     await this.menusService.deleteOne(deleteMenuDto);
   }
