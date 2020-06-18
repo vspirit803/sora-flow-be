@@ -11,7 +11,7 @@ import { CreateOperateLogDto } from 'src/operate-logs/dto';
 import { OperateLogsService } from 'src/operate-logs/operate-logs.service';
 
 @Injectable()
-export class LogOperateInterceptor implements NestInterceptor {
+export class OperateLogInterceptor implements NestInterceptor {
   constructor(
     private readonly operateLogsService: OperateLogsService,
     private readonly reflector: Reflector,

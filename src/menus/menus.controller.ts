@@ -13,7 +13,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { LogOperateInterceptor } from 'src/Interceptors/log.operate.interceptor';
+import { OperateLogInterceptor } from 'src/Interceptors/operate-log.interceptor';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
 
 import {
@@ -42,7 +42,7 @@ export class MenusController {
 
   @Post()
   @UsePipes(ExcludeUndefinedPipe)
-  @UseInterceptors(LogOperateInterceptor)
+  @UseInterceptors(OperateLogInterceptor)
   @SetMetadata('operateTarget', '菜单')
   async create(
     @Body()
@@ -53,14 +53,14 @@ export class MenusController {
 
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
-  @UseInterceptors(LogOperateInterceptor)
+  @UseInterceptors(OperateLogInterceptor)
   @SetMetadata('operateTarget', '菜单')
   async updateOne(@Body() updateMenuDto: UpdateMenuDto) {
     await this.menusService.updateOne(updateMenuDto);
   }
 
   @Delete()
-  @UseInterceptors(LogOperateInterceptor)
+  @UseInterceptors(OperateLogInterceptor)
   @SetMetadata('operateTarget', '菜单')
   async deleteOne(@Body() deleteMenuDto: DeleteMenuDto) {
     await this.menusService.deleteOne(deleteMenuDto);
