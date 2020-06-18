@@ -43,7 +43,7 @@ export class MenusController {
   @Post()
   @UsePipes(ExcludeUndefinedPipe)
   @UseInterceptors(LogOperateInterceptor)
-  @SetMetadata('operateName', '新增菜单')
+  @SetMetadata('operateTarget', '菜单')
   async create(
     @Body()
     createMenuDto: CreateMenuDto,
@@ -54,14 +54,14 @@ export class MenusController {
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
   @UseInterceptors(LogOperateInterceptor)
-  @SetMetadata('operateName', '修改菜单')
+  @SetMetadata('operateTarget', '菜单')
   async updateOne(@Body() updateMenuDto: UpdateMenuDto) {
     await this.menusService.updateOne(updateMenuDto);
   }
 
   @Delete()
   @UseInterceptors(LogOperateInterceptor)
-  @SetMetadata('operateName', '删除菜单')
+  @SetMetadata('operateTarget', '菜单')
   async deleteOne(@Body() deleteMenuDto: DeleteMenuDto) {
     await this.menusService.deleteOne(deleteMenuDto);
   }

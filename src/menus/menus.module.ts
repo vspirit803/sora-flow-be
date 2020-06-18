@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LoggerModule } from 'src/logger/logger.module';
+import { OperateLogsModule } from 'src/operate-logs/operate-logs.module';
 
 import { MenuSchema } from './menu.schema';
 import { MenusController } from './menus.controller';
@@ -9,7 +9,7 @@ import { MenusService } from './menus.service';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Menu', schema: MenuSchema }]),
-    LoggerModule,
+    OperateLogsModule,
   ],
   controllers: [MenusController],
   providers: [MenusService],
