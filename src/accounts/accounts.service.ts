@@ -21,12 +21,11 @@ export class AccountsService {
 
   async updateOne(updateAccountDto: UpdateAccountDto) {
     const { id } = updateAccountDto;
-    await this.accountModel.updateOne({ _id: id }, updateAccountDto);
+    await this.accountModel.updateOne({ id }, updateAccountDto);
   }
 
   async deleteOne(deleteAccountDto: DeleteAccountDto) {
-    const { id } = deleteAccountDto;
-    await this.accountModel.deleteOne({ _id: id });
+    await this.accountModel.deleteOne(deleteAccountDto);
   }
 
   async findAll(query: QueryAccountDto): Promise<Account[]> {
@@ -44,6 +43,6 @@ export class AccountsService {
   }
 
   async findOne(id: string): Promise<Account | undefined> {
-    return this.accountModel.findOne({ _id: id }).populate('role').exec();
+    return this.accountModel.findOne({ id }).populate('role').exec();
   }
 }

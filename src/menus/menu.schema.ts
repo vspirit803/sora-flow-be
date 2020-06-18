@@ -1,17 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { ObjectId } from 'mongodb';
-import { Document } from 'mongoose';
+import { BaseSchema } from 'src/Common/BaseSchema';
 
 @Schema({ toJSON: { getters: true, virtuals: false } })
-export class Menu extends Document {
+export class Menu extends BaseSchema {
   @Prop({ required: true })
   name: string;
-
-  @Prop({ default: () => new ObjectId() })
-  id: string;
-
-  @Prop({ default: () => new ObjectId(), select: false })
-  _id: ObjectId;
 
   @Prop({ default: [] })
   namePath: Array<string>;
@@ -36,9 +29,6 @@ export class Menu extends Document {
 
   @Prop({ default: true })
   visible: boolean;
-
-  @Prop({ required: false, select: false })
-  __v: number;
 }
 
 export const MenuSchema = SchemaFactory.createForClass(Menu);

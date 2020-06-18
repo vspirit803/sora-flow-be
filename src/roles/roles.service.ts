@@ -24,16 +24,15 @@ export class RolesService {
   }
 
   async findOne(id: string): Promise<Role | undefined> {
-    return this.roleModel.findOne({ _id: id }).exec();
+    return this.roleModel.findOne({ id }).exec();
   }
 
   async updateOne(updateRoleDto: UpdateRoleDto) {
     const { id } = updateRoleDto;
-    await this.roleModel.updateOne({ _id: id }, updateRoleDto);
+    await this.roleModel.updateOne({ id }, updateRoleDto);
   }
 
   async deleteOne(deleteRoleDto: DeleteRoleDto) {
-    const { id } = deleteRoleDto;
-    await this.roleModel.deleteOne({ _id: id });
+    await this.roleModel.deleteOne(deleteRoleDto);
   }
 }
