@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { IsString } from 'class-validator';
+import { IsMongoId, IsString } from 'class-validator';
 
 export class CreateAccountDto {
   @IsString()
@@ -10,7 +10,7 @@ export class CreateAccountDto {
   @Expose()
   readonly password: string;
 
-  @IsString()
+  @IsMongoId()
   @Expose()
   readonly roleId: string;
 }

@@ -2,8 +2,8 @@ import { Expose } from 'class-transformer';
 import { IsOptional, IsString } from 'class-validator';
 
 export class QueryAccountDto {
-  @Expose()
   @IsOptional()
   @IsString()
+  @Expose()
   readonly name: string;
 }

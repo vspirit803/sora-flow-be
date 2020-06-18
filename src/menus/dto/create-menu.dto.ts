@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { IsOptional, IsString } from 'class-validator';
+import { IsMongoId, IsOptional, IsString } from 'class-validator';
 
 export class CreateMenuDto {
   @IsString()
@@ -20,7 +20,7 @@ export class CreateMenuDto {
   readonly url: string;
 
   @IsOptional()
-  @IsString()
+  @IsMongoId()
   @Expose()
   readonly parentId?: string;
 }

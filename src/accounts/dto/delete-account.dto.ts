@@ -1,8 +1,8 @@
 import { Expose } from 'class-transformer';
-import { IsString } from 'class-validator';
+import { IsMongoId } from 'class-validator';
 
 export class DeleteAccountDto {
   @Expose()
-  @IsString()
+  @IsMongoId()
   readonly id: string;
 }

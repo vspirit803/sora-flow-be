@@ -3,12 +3,12 @@ import { IsMongoId, IsOptional, IsString } from 'class-validator';
 
 export class QueryMenuDto {
   @IsOptional()
-  @Expose()
   @IsMongoId()
+  @Expose()
   readonly id: string;
 
   @IsOptional()
-  @Expose()
   @IsString()
+  @Expose()
   readonly name: string;
 }
