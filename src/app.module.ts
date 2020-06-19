@@ -11,6 +11,7 @@ import { LoggerLoginMiddleware } from './Middlewares/logger.login.middleware';
 import { LoggerMiddleware } from './Middlewares/logger.middleware';
 import { OperateLogsModule } from './operate-logs/operate-logs.module';
 import { RolesModule } from './roles/roles.module';
+import { VersionsModule } from './versions/versions.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { RolesModule } from './roles/roles.module';
     RolesModule,
     MenusModule,
     OperateLogsModule,
+    VersionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
