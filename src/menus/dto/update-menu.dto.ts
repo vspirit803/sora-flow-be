@@ -14,11 +14,6 @@ export class UpdateMenuDto {
   @IsOptional()
   @IsString()
   @Expose()
-  readonly type?: string;
-
-  @IsOptional()
-  @IsString()
-  @Expose()
   readonly icon?: string;
 
   @IsOptional()

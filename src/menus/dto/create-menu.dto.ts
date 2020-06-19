@@ -11,9 +11,9 @@ export class CreateMenuDto {
   @Expose()
   readonly icon?: string;
 
-  @IsString()
+  @IsString({ groups: ['directory', 'item'] })
   @Expose()
-  readonly type: string;
+  readonly type: 'directory' | 'item';
 
   @IsString()
   @Expose()

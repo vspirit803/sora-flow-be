@@ -25,7 +25,7 @@ export class Menu extends BaseSchema {
   enable: boolean;
 
   @Prop({ required: true })
-  type: string;
+  type: 'directory' | 'item';
 
   @Prop({ default: true })
   visible: boolean;

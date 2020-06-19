@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -32,14 +32,15 @@ export class MenusService {
 
   async create(createMenuDto: CreateMenuDto) {
     if (createMenuDto.parentId) {
-      let parent: Menu;
-      try {
-        parent = await this.findOne(createMenuDto.parentId);
-        if (!parent) {
-          throw new Error('不存在的parentId');
-        }
-      } catch (error) {
-        throw new Error('不存在的parentId');
+      const parent = await this.findOne(createMenuDto.parentId);
+      if (!parent) {
+        throw new HttpException('不存在的parentId', HttpStatus.BAD_REQUEST);
+      }
+      if (parent.type === 'item') {
+        throw new HttpException(
+          '不能给菜单项添加子菜单',
+          HttpStatus.BAD_REQUEST,
+        );
       }
       const { idPath, namePath, id, name } = parent;
 
