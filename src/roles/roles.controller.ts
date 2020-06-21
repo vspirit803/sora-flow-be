@@ -30,6 +30,7 @@ import { RolesService } from './roles.service';
     transformOptions: { excludeExtraneousValues: true },
   }),
 )
+@UseOperateLog('角色')
 @Controller('roles')
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
@@ -40,7 +41,6 @@ export class RolesController {
   }
 
   @Post()
-  @UseOperateLog('角色')
   async create(
     @Body()
     createRoleDto: CreateRoleDto,
@@ -50,13 +50,11 @@ export class RolesController {
 
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
-  @UseOperateLog('角色')
   async updateOne(@Body() updateRoleDto: UpdateRoleDto) {
     await this.rolesService.updateOne(updateRoleDto);
   }
 
   @Delete()
-  @UseOperateLog('角色')
   async deleteOne(@Body() deleteRoleDto: DeleteRoleDto) {
     await this.rolesService.deleteOne(deleteRoleDto);
   }

@@ -29,6 +29,7 @@ import { MenusService } from './menus.service';
   }),
 )
 @UseGuards(JwtAuthGuard)
+@UseOperateLog('菜单')
 @Controller('menus')
 export class MenusController {
   constructor(private readonly menusService: MenusService) {}
@@ -40,7 +41,6 @@ export class MenusController {
 
   @Post()
   @UsePipes(ExcludeUndefinedPipe)
-  @UseOperateLog('菜单')
   async create(
     @Body()
     createMenuDto: CreateMenuDto,
@@ -50,13 +50,11 @@ export class MenusController {
 
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
-  @UseOperateLog('菜单')
   async updateOne(@Body() updateMenuDto: UpdateMenuDto) {
     await this.menusService.updateOne(updateMenuDto);
   }
 
   @Delete()
-  @UseOperateLog('菜单')
   async deleteOne(@Body() deleteMenuDto: DeleteMenuDto) {
     await this.menusService.deleteOne(deleteMenuDto);
   }

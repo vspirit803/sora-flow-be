@@ -7,7 +7,6 @@ import {
   Post,
   Query,
   Req,
-  Request,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -31,6 +30,7 @@ import { OrganizationsService } from './organizations.service';
   }),
 )
 @UseGuards(JwtAuthGuard)
+@UseOperateLog('组织')
 @Controller('organizations')
 export class OrganizationsController {
   constructor(private readonly organizationsService: OrganizationsService) {}
@@ -43,7 +43,6 @@ export class OrganizationsController {
 
   @Post()
   @UsePipes(ExcludeUndefinedPipe)
-  @UseOperateLog('组织')
   async create(
     @Body()
     createOrganizationDto: CreateOrganizationDto,
@@ -58,13 +57,11 @@ export class OrganizationsController {
 
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
-  @UseOperateLog('组织')
   async updateOne(@Body() updateOrganizationDto: UpdateOrganizationDto) {
     await this.organizationsService.updateOne(updateOrganizationDto);
   }
 
   @Delete()
-  @UseOperateLog('组织')
   async deleteOne(@Body() deleteOrganizationDto: DeleteOrganizationDto) {
     await this.organizationsService.deleteOne(deleteOrganizationDto);
   }

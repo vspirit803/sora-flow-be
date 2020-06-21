@@ -31,6 +31,7 @@ import {
   }),
 )
 @UseGuards(JwtAuthGuard)
+@UseOperateLog('账号')
 @Controller('accounts')
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
@@ -46,7 +47,6 @@ export class AccountsController {
   }
 
   @Post()
-  @UseOperateLog('账号')
   async create(
     @Body()
     createAccountDto: CreateAccountDto,
@@ -56,13 +56,11 @@ export class AccountsController {
 
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
-  @UseOperateLog('账号')
   async updateOne(@Body() updateAccountDto: UpdateAccountDto) {
     await this.accountsService.updateOne(updateAccountDto);
   }
 
   @Delete()
-  @UseOperateLog('账号')
   async deleteOne(@Body() deleteAccountDto: DeleteAccountDto) {
     await this.accountsService.deleteOne(deleteAccountDto);
   }

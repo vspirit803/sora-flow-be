@@ -19,9 +19,12 @@ export class OperateLogInterceptor implements NestInterceptor {
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const { body, method, user, ip } = context.switchToHttp().getRequest();
+    if (method === 'GET') {
+      return next.handle();
+    }
     const operateTarget = this.reflector.get<string>(
       'operateTarget',
-      context.getHandler(),
+      context.getClass(),
     );
     let operateType: 'create' | 'update' | 'delete' | 'unknown';
     switch (method) {
@@ -44,7 +47,6 @@ export class OperateLogInterceptor implements NestInterceptor {
       operateType,
       user,
     };
-
     return next.handle().pipe(
       tap(() => {
         this.operateLogsService.create(data);

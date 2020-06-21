@@ -29,6 +29,7 @@ import { VersionsService } from './versions.service';
   }),
 )
 @UseGuards(JwtAuthGuard)
+@UseOperateLog('版本')
 @Controller('versions')
 export class VersionsController {
   constructor(private readonly versionsService: VersionsService) {}
@@ -40,7 +41,6 @@ export class VersionsController {
   }
 
   @Post()
-  @UseOperateLog('版本')
   async create(
     @Body()
     createVersionDto: CreateVersionDto,
@@ -50,13 +50,11 @@ export class VersionsController {
 
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
-  @UseOperateLog('版本')
   async updateOne(@Body() updateVersionDto: UpdateVersionDto) {
     await this.versionsService.updateOne(updateVersionDto);
   }
 
   @Delete()
-  @UseOperateLog('版本')
   async deleteOne(@Body() deleteVersionDto: DeleteVersionDto) {
     await this.versionsService.deleteOne(deleteVersionDto);
   }
