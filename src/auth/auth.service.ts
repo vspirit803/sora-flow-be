@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-
-import { AccountsService } from '../accounts/accounts.service';
+import { AccountsService } from 'src/accounts/accounts.service';
+import { Organization } from 'src/organizations/organization.schema';
 
 @Injectable()
 export class AuthService {
@@ -32,6 +32,30 @@ export class AuthService {
       sub: user.id,
       roleId: user.roleId,
       roleName: user.roleName,
+    };
+    return {
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      access_token: this.jwtService.sign(payload),
+    };
+  }
+
+  async loginOrganization(jwtAccount: any, organizationId: string) {
+    const { id } = jwtAccount;
+    const account = await this.accountsService.findOne(id);
+    account.organizations as Array<Organization>;
+    const organization = (account.organizations as Array<Organization>).find(
+      (each) => each.id === organizationId,
+    );
+    if (!organization) {
+      return null;
+    }
+    const payload = {
+      name: account.name,
+      sub: account.id,
+      roleId: account.roleId,
+      roleName: account.roleName,
+      organizationId,
+      organizationName: organization.name,
     };
     return {
       // eslint-disable-next-line @typescript-eslint/camelcase

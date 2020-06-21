@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local-auth.guard';
+import { OrganizationAuthGuard } from './auth/organization-auth.guard';
 
 @Controller()
 export class AppController {
@@ -26,6 +27,12 @@ export class AppController {
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
+    return req.user;
+  }
+
+  @UseGuards(OrganizationAuthGuard)
+  @Get('profile/organization')
+  getOrganizationProfile(@Request() req) {
     return req.user;
   }
 }

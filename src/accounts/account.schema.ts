@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { BaseSchema } from 'src/Common/BaseSchema';
+import { Organization } from 'src/organizations/organization.schema';
 
 @Schema({
   toJSON: { getters: true, virtuals: false },
@@ -26,9 +27,10 @@ export class Account extends BaseSchema {
     get: function () {
       return this.organizationsList ?? this._doc.organizations;
     },
+    type: [],
   })
   /**组织列表 */
-  organizations: Array<string>;
+  organizations: Array<string | Organization>;
 }
 
 export const AccountSchema = SchemaFactory.createForClass(Account);
