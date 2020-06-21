@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { IsString } from 'class-validator';
+import { IsArray, IsMongoId, IsString } from 'class-validator';
 
 export class CreateRoleDto {
   @IsString()
@@ -9,4 +9,11 @@ export class CreateRoleDto {
   @IsString()
   @Expose()
   readonly text: string;
+
+  @IsArray()
+  @IsMongoId({
+    each: true,
+  })
+  @Expose()
+  readonly authorizedOperations: Array<string>;
 }
