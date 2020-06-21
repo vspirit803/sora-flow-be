@@ -10,6 +10,7 @@ import { MenusModule } from './menus/menus.module';
 import { LoggerLoginMiddleware } from './Middlewares/logger.login.middleware';
 import { LoggerMiddleware } from './Middlewares/logger.middleware';
 import { OperateLogsModule } from './operate-logs/operate-logs.module';
+import { OrganizationsModule } from './organizations/organizations.module';
 import { RolesModule } from './roles/roles.module';
 import { VersionsModule } from './versions/versions.module';
 
@@ -28,6 +29,7 @@ import { VersionsModule } from './versions/versions.module';
     RolesModule,
     MenusModule,
     OperateLogsModule,
+    OrganizationsModule,
     VersionsModule,
   ],
   controllers: [AppController],
