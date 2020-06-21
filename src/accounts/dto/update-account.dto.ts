@@ -1,9 +1,9 @@
 import { Expose } from 'class-transformer';
-import { IsMongoId, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsMongoId, IsOptional, IsString } from 'class-validator';
 
 export class UpdateAccountDto {
-  @IsString()
   @IsMongoId()
+  @Expose()
   readonly id: string;
 
   @IsOptional()
@@ -20,4 +20,12 @@ export class UpdateAccountDto {
   @IsMongoId()
   @Expose()
   readonly roleId?: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsMongoId({
+    each: true,
+  })
+  @Expose()
+  readonly organizations: Array<string>;
 }

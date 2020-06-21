@@ -39,10 +39,15 @@ export class AccountsService {
     return this.accountModel
       .findOne({ name, password })
       .populate('role')
+      .populate('organizationsList')
       .exec();
   }
 
   async findOne(id: string): Promise<Account | undefined> {
-    return this.accountModel.findOne({ id }).populate('role').exec();
+    return this.accountModel
+      .findOne({ id })
+      .populate('role')
+      .populate('organizationsList')
+      .exec();
   }
 }
