@@ -6,4 +6,9 @@ export class QueryAccountDto {
   @IsString()
   @Expose()
   readonly name?: string;
+
+  @IsOptional()
+  @IsString()
+  @Expose()
+  readonly nickname?: string;
 }

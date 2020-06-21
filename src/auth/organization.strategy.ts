@@ -25,6 +25,7 @@ export class OrganizationStrategy extends PassportStrategy(
     return {
       id: payload.sub,
       name: payload.name,
+      nickname: payload.nickname,
       roleId: payload.roleId,
       roleName: payload.roleName,
       organizationId: payload.organizationId,

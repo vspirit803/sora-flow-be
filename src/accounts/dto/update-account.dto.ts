@@ -14,6 +14,11 @@ export class UpdateAccountDto {
   @IsOptional()
   @IsString()
   @Expose()
+  readonly nickname?: string;
+
+  @IsOptional()
+  @IsString()
+  @Expose()
   readonly password?: string;
 
   @IsOptional()

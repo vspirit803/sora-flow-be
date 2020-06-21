@@ -8,6 +8,10 @@ export class CreateAccountDto {
 
   @IsString()
   @Expose()
+  readonly nickname: string;
+
+  @IsString()
+  @Expose()
   readonly password: string;
 
   @IsMongoId()

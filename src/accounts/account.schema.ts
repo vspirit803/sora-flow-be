@@ -9,6 +9,9 @@ export class Account extends BaseSchema {
   @Prop()
   name: string;
 
+  @Prop()
+  nickname: string;
+
   @Prop({ select: false })
   password: string;
 

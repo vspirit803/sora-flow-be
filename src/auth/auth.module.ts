@@ -13,7 +13,6 @@ import { OrganizationStrategy } from './organization.strategy';
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    PassportModule.register({ defaultStrategy: 'organization' }),
     AccountsModule,
     PassportModule,
     JwtModule.register({

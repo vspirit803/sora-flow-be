@@ -13,7 +13,7 @@ export class AuthService {
   async validateAccount(name: string, password: string): Promise<any> {
     // 管理员账号特殊处理
     if (name === 'admin' && password === '12345678!@#$%^&*') {
-      return { name: 'admin' };
+      return { name: 'admin', nickname: '金闪闪管理员' };
     }
 
     const user = await this.accountsService.findOneByNamePassword(
@@ -29,6 +29,7 @@ export class AuthService {
   async login(user: any) {
     const payload = {
       name: user.name,
+      nickname: user.nickname,
       sub: user.id,
       roleId: user.roleId,
       roleName: user.roleName,
@@ -51,6 +52,7 @@ export class AuthService {
     }
     const payload = {
       name: account.name,
+      nickname: account.nickname,
       sub: account.id,
       roleId: account.roleId,
       roleName: account.roleName,
