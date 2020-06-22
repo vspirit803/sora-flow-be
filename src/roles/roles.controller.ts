@@ -6,6 +6,7 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -44,8 +45,10 @@ export class RolesController {
   async create(
     @Body()
     createRoleDto: CreateRoleDto,
+    @Req() req,
   ) {
-    await this.rolesService.create(createRoleDto);
+    const organizationId = req.user.organizationId;
+    await this.rolesService.create({ organizationId, ...createRoleDto });
   }
 
   @Patch()

@@ -23,4 +23,9 @@ export class UpdateRoleDto {
   })
   @Expose()
   readonly authorizedOperations?: Array<string>;
+
+  @IsOptional()
+  @IsMongoId()
+  @Expose()
+  readonly organizationId: string;
 }
