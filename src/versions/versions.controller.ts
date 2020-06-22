@@ -6,11 +6,13 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
 
@@ -40,14 +42,18 @@ export class VersionsController {
     return this.versionsService.findAll(query);
   }
 
+  @UseGuards(OrganizationAuthGuard)
   @Post()
   async create(
     @Body()
     createVersionDto: CreateVersionDto,
+    @Req() req,
   ) {
-    await this.versionsService.create(createVersionDto);
+    const organizationId = req.user.organizationId;
+    await this.versionsService.create(createVersionDto, organizationId);
   }
 
+  @UseGuards(OrganizationAuthGuard)
   @Patch()
   @UsePipes(ExcludeUndefinedPipe)
   async updateOne(@Body() updateVersionDto: UpdateVersionDto) {

@@ -9,15 +9,14 @@ export class Version extends BaseSchema {
   /**版本名称 */
   name: string;
 
-  @Prop({ default: [], select: false })
-  /**授权操作列表 */
-  authorizedOperations: Array<string>;
+  @Prop()
+  roleId: string;
 }
 
 export const VersionSchema = SchemaFactory.createForClass(Version);
-VersionSchema.virtual('authorizedOperationsList', {
-  ref: 'Menu',
-  localField: 'authorizedOperations',
+VersionSchema.virtual('role', {
+  ref: 'Role',
+  localField: 'roleId',
   foreignField: 'id',
   justOne: true,
 });
