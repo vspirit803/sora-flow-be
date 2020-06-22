@@ -31,8 +31,6 @@ export class AuthService {
       name: user.name,
       nickname: user.nickname,
       sub: user.id,
-      roleId: user.roleId,
-      roleName: user.roleName,
     };
     return {
       // eslint-disable-next-line @typescript-eslint/camelcase
@@ -43,10 +41,12 @@ export class AuthService {
   async loginOrganization(jwtAccount: any, organizationId: string) {
     const { id } = jwtAccount;
     const account = await this.accountsService.findOne(id);
-    account.organizations as Array<Organization>;
-    const organization = (account.organizations as Array<Organization>).find(
+    const organization = (account.organizations.find(
       (each) => each.id === organizationId,
-    );
+    ) as unknown) as Organization & {
+      name: string;
+      roles: Array<{ id: string; name: string; text: string }>;
+    };
     if (!organization) {
       return null;
     }
@@ -54,8 +54,7 @@ export class AuthService {
       name: account.name,
       nickname: account.nickname,
       sub: account.id,
-      roleId: account.roleId,
-      roleName: account.roleName,
+      roles: organization.roles,
       organizationId,
       organizationName: organization.name,
     };

@@ -15,23 +15,26 @@ export class AccountsService {
   constructor(@InjectModel('Account') private accountModel: Model<Account>) {}
 
   async create(createAccountDto: CreateAccountDto): Promise<Account> {
-    console.log(createAccountDto);
     const createdAccount = new this.accountModel(createAccountDto);
     return createdAccount.save();
   }
 
   async updateOne(updateAccountDto: UpdateAccountDto) {
-    // const { id } = updateAccountDto;
-    // await this.accountModel.updateOne({ id }, updateAccountDto);
+    const { id } = updateAccountDto;
+    await this.accountModel.updateOne({ id }, updateAccountDto);
+    // const { id, organizations, ...others } = updateAccountDto;
+    // await this.accountModel.updateOne({ id }, others);
+    // if(organizations){
 
-    const { id, organizationRoleMap } = updateAccountDto;
-    for (const key in organizationRoleMap) {
-      const rolesList = organizationRoleMap[key];
-      await this.accountModel.updateOne(
-        { id },
-        { ['organizationRoleMap.' + key]: rolesList },
-      );
-    }
+    // }
+    // const { id } = updateAccountDto;
+    // for (const key in organizationRoleMap) {
+    //   const rolesList = organizationRoleMap[key];
+    //   await this.accountModel.updateOne(
+    //     { id },
+    //     { ['organizationRoleMap.' + key]: rolesList },
+    //   );
+    // }
   }
 
   async deleteOne(deleteAccountDto: DeleteAccountDto) {
@@ -49,15 +52,16 @@ export class AccountsService {
     return this.accountModel
       .findOne({ name, password })
       .populate('role')
-      .populate('organizationsList')
       .exec();
   }
 
   async findOne(id: string): Promise<Account | undefined> {
-    return this.accountModel
+    const account = await this.accountModel
       .findOne({ id })
       .populate('role')
-      .populate('organizationsList')
+      .populate('organizationList')
+      .populate('organizationRolesList')
       .exec();
+    return account;
   }
 }

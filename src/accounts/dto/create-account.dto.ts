@@ -1,16 +1,13 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import {
   IsArray,
   IsMongoId,
-  IsObject,
   IsOptional,
   IsString,
-  Validate,
+  ValidateNested,
 } from 'class-validator';
 
-import { IsOrganizationRoleMap } from './IsOrganizationRoleMap';
-
-// import { IsOrganizationRoleMap } from './IsOrganizationRoleMap';
+import { AccountOrganization } from './AccountOrganization';
 
 export class CreateAccountDto {
   @IsString()
@@ -31,17 +28,8 @@ export class CreateAccountDto {
 
   @IsOptional()
   @IsArray()
-  @IsMongoId({
-    each: true,
-  })
+  @Type(() => AccountOrganization)
+  @ValidateNested({ each: true })
   @Expose()
-  readonly organizations: Array<string>;
-
-  @IsOptional()
-  @IsObject()
-  @Validate(IsOrganizationRoleMap, {
-    message: 'organizationRoleMap must be { [key: MongoId]: Array<MongoId> }',
-  })
-  @Expose()
-  readonly organizationRoleMap: Record<string, Array<string>>;
+  readonly organizations: Array<AccountOrganization>;
 }
