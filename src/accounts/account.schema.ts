@@ -34,6 +34,13 @@ export class Account extends BaseSchema {
   })
   /**组织列表 */
   organizations: Array<string | Organization>;
+
+  @Prop({
+    default: () => new Map(),
+    type: Map,
+    of: [Array],
+  })
+  organizationRoleMap: Record<string, Array<string>>;
 }
 
 export const AccountSchema = SchemaFactory.createForClass(Account);

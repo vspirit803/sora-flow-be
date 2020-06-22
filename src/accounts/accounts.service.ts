@@ -15,13 +15,23 @@ export class AccountsService {
   constructor(@InjectModel('Account') private accountModel: Model<Account>) {}
 
   async create(createAccountDto: CreateAccountDto): Promise<Account> {
+    console.log(createAccountDto);
     const createdAccount = new this.accountModel(createAccountDto);
     return createdAccount.save();
   }
 
   async updateOne(updateAccountDto: UpdateAccountDto) {
-    const { id } = updateAccountDto;
-    await this.accountModel.updateOne({ id }, updateAccountDto);
+    // const { id } = updateAccountDto;
+    // await this.accountModel.updateOne({ id }, updateAccountDto);
+
+    const { id, organizationRoleMap } = updateAccountDto;
+    for (const key in organizationRoleMap) {
+      const rolesList = organizationRoleMap[key];
+      await this.accountModel.updateOne(
+        { id },
+        { ['organizationRoleMap.' + key]: rolesList },
+      );
+    }
   }
 
   async deleteOne(deleteAccountDto: DeleteAccountDto) {

@@ -1,5 +1,16 @@
 import { Expose } from 'class-transformer';
-import { IsArray, IsMongoId, IsOptional, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsMongoId,
+  IsObject,
+  IsOptional,
+  IsString,
+  Validate,
+} from 'class-validator';
+
+import { IsOrganizationRoleMap } from './IsOrganizationRoleMap';
+
+// import { IsOrganizationRoleMap } from './IsOrganizationRoleMap';
 
 export class CreateAccountDto {
   @IsString()
@@ -25,4 +36,12 @@ export class CreateAccountDto {
   })
   @Expose()
   readonly organizations: Array<string>;
+
+  @IsOptional()
+  @IsObject()
+  @Validate(IsOrganizationRoleMap, {
+    message: 'organizationRoleMap must be { [key: MongoId]: Array<MongoId> }',
+  })
+  @Expose()
+  readonly organizationRoleMap: Record<string, Array<string>>;
 }
