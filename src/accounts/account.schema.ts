@@ -14,16 +14,6 @@ export class Account extends BaseSchema {
   @Prop({ select: false })
   password: string;
 
-  @Prop()
-  roleId: string;
-
-  @Prop({
-    get: function () {
-      return this.role.name;
-    },
-  })
-  roleName: string;
-
   @Prop({
     default: [],
     type: [],
@@ -56,12 +46,6 @@ export class Account extends BaseSchema {
 }
 
 export const AccountSchema = SchemaFactory.createForClass(Account);
-AccountSchema.virtual('role', {
-  ref: 'Role',
-  localField: 'roleId',
-  foreignField: 'id',
-  justOne: true,
-});
 AccountSchema.virtual('organizationList', {
   ref: 'Organization',
   localField: 'organizations.id',

@@ -15,7 +15,24 @@ export class AccountsService {
   constructor(@InjectModel('Account') private accountModel: Model<Account>) {}
 
   async create(createAccountDto: CreateAccountDto): Promise<Account> {
-    const createdAccount = new this.accountModel(createAccountDto);
+    const {
+      organizationId,
+      roles = [],
+      organizations,
+      ...others
+    } = createAccountDto;
+    const createdAccount = new this.accountModel(others);
+    if (organizations) {
+      createdAccount.organizations = organizations;
+    } else {
+      createdAccount.organizations = [
+        {
+          id: organizationId,
+          roles,
+        },
+      ];
+    }
+
     return createdAccount.save();
   }
 
@@ -49,16 +66,12 @@ export class AccountsService {
     name: string,
     password: string,
   ): Promise<Account | undefined> {
-    return this.accountModel
-      .findOne({ name, password })
-      .populate('role')
-      .exec();
+    return this.accountModel.findOne({ name, password }).exec();
   }
 
   async findOne(id: string): Promise<Account | undefined> {
     const account = await this.accountModel
       .findOne({ id })
-      .populate('role')
       .populate('organizationList')
       .populate('organizationRolesList')
       .exec();

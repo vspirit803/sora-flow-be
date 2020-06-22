@@ -22,14 +22,21 @@ export class CreateAccountDto {
   @Expose()
   readonly password: string;
 
-  @IsMongoId()
-  @Expose()
-  readonly roleId: string;
-
   @IsOptional()
   @IsArray()
   @Type(() => AccountOrganization)
   @ValidateNested({ each: true })
   @Expose()
   readonly organizations: Array<AccountOrganization>;
+
+  @IsOptional()
+  @IsMongoId()
+  @Expose()
+  readonly organizationId: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsMongoId({ each: true })
+  @Expose()
+  readonly roles: Array<string>;
 }

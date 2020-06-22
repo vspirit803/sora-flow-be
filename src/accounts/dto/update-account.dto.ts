@@ -30,11 +30,6 @@ export class UpdateAccountDto {
   readonly password?: string;
 
   @IsOptional()
-  @IsMongoId()
-  @Expose()
-  readonly roleId?: string;
-
-  @IsOptional()
   @IsArray()
   @Type(() => AccountOrganization)
   @ValidateNested({ each: true })

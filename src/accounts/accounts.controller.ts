@@ -7,10 +7,12 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -46,12 +48,15 @@ export class AccountsController {
     return this.accountsService.findOne(id);
   }
 
+  @UseGuards(OrganizationAuthGuard)
   @Post()
   async create(
     @Body()
     createAccountDto: CreateAccountDto,
+    @Req() req,
   ) {
-    await this.accountsService.create(createAccountDto);
+    const organizationId = req.user.organizationId;
+    await this.accountsService.create({ organizationId, ...createAccountDto });
   }
 
   @Patch()
