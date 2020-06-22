@@ -18,7 +18,12 @@ export class CreateRoleDto {
   readonly authorizedOperations: Array<string>;
 
   @IsOptional()
+  @IsString({ groups: ['normal', 'version'] })
+  @Expose()
+  readonly type?: 'normal' | 'version';
+
+  @IsOptional()
   @IsMongoId()
   @Expose()
-  readonly organizationId: string;
+  readonly organizationId?: string;
 }

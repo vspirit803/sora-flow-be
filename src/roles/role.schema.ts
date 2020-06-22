@@ -15,6 +15,9 @@ export class Role extends BaseSchema {
   /**授权操作列表 */
   authorizedOperations: Array<string>;
 
+  @Prop({ default: 'normal' })
+  type: 'normal' | 'version';
+
   @Prop()
   /**组织id */
   organizationId: string;

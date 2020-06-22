@@ -27,5 +27,5 @@ export class UpdateRoleDto {
   @IsOptional()
   @IsMongoId()
   @Expose()
-  readonly organizationId: string;
+  readonly organizationId?: string;
 }
