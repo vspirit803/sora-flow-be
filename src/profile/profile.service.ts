@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { AccountsService } from 'src/accounts/accounts.service';
 import { QueryMenuDto } from 'src/menus/dto';
 import { MenusService } from 'src/menus/menus.service';
 import { transformToTree } from 'src/menus/transformToTree';
@@ -9,6 +10,7 @@ export class ProfileService {
   constructor(
     private readonly menusService: MenusService,
     private readonly rolesService: RolesService,
+    private readonly accountsService: AccountsService,
   ) {}
 
   async getMenus(query: QueryMenuDto, roleList: Array<string>) {
@@ -42,5 +44,11 @@ export class ProfileService {
     });
 
     return transformToTree(authorizedMenu);
+  }
+
+  async getOrganizations(accountId) {
+    return (await this.accountsService.findOne(accountId)).organizations.map(
+      ({ roles, ...others }) => others,
+    );
   }
 }

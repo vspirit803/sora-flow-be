@@ -31,4 +31,11 @@ export class ProfileController {
     const roleList: Array<string> = user.roles.map((each) => each.id); //该用户的角色id
     return this.profileService.getMenus(query, roleList);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('organizations')
+  /**组织列表 */
+  getOrganizations(@User() user) {
+    return this.profileService.getOrganizations(user.id);
+  }
 }
