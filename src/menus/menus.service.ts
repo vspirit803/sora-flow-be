@@ -9,13 +9,12 @@ import {
   UpdateMenuDto,
 } from './dto';
 import { Menu } from './menu.schema';
-import { MenuTreeItem, transformToTree } from './transformToTree';
 
 @Injectable()
 export class MenusService {
   constructor(@InjectModel('Menu') private menuModel: Model<Menu>) {}
 
-  async findAll(query: QueryMenuDto): Promise<MenuTreeItem[]> {
+  async findAll(query: QueryMenuDto): Promise<Menu[]> {
     const { id, name } = query;
     const condition = [];
     if (id) {
@@ -27,7 +26,7 @@ export class MenusService {
     const menuItems = await this.menuModel
       .find(condition.length ? { $and: condition } : {})
       .exec();
-    return transformToTree(menuItems);
+    return menuItems;
   }
 
   async create(createMenuDto: CreateMenuDto) {

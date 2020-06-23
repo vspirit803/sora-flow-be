@@ -27,6 +27,12 @@ export class RolesService {
     return this.roleModel.findOne({ id }).exec();
   }
 
+  async findByRoles(roles: Array<string>) {
+    return this.roleModel
+      .find({ id: { $in: roles } }, { authorizedOperations: true })
+      .exec();
+  }
+
   async updateOne(updateRoleDto: UpdateRoleDto) {
     const { id } = updateRoleDto;
     await this.roleModel.updateOne({ id }, updateRoleDto);

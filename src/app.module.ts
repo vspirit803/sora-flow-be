@@ -11,6 +11,7 @@ import { LoggerLoginMiddleware } from './Middlewares/logger.login.middleware';
 import { LoggerMiddleware } from './Middlewares/logger.middleware';
 import { OperateLogsModule } from './operate-logs/operate-logs.module';
 import { OrganizationsModule } from './organizations/organizations.module';
+import { ProfileModule } from './profile/profile.module';
 import { RolesModule } from './roles/roles.module';
 import { VersionsModule } from './versions/versions.module';
 
@@ -31,6 +32,7 @@ import { VersionsModule } from './versions/versions.module';
     OperateLogsModule,
     OrganizationsModule,
     VersionsModule,
+    ProfileModule,
   ],
   controllers: [AppController],
   providers: [AppService],

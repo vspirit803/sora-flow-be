@@ -9,5 +9,6 @@ import { MenusService } from './menus.service';
   imports: [MongooseModule.forFeature([{ name: 'Menu', schema: MenuSchema }])],
   controllers: [MenusController],
   providers: [MenusService],
+  exports: [MenusService],
 })
 export class MenusModule {}

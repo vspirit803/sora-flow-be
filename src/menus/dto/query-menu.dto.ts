@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { IsMongoId, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsMongoId, IsOptional, IsString } from 'class-validator';
 
 export class QueryMenuDto {
   @IsOptional()
@@ -11,4 +11,9 @@ export class QueryMenuDto {
   @IsString()
   @Expose()
   readonly name?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  @Expose()
+  readonly enable?: boolean;
 }
