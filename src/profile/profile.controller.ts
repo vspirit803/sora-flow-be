@@ -3,20 +3,12 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { User } from 'src/Decorators/user.decorator';
 import { QueryMenuDto } from 'src/menus/dto';
-import { MenusService } from 'src/menus/menus.service';
-import { transformToTree } from 'src/menus/transformToTree';
-import { Role } from 'src/roles/role.schema';
-import { RolesService } from 'src/roles/roles.service';
 
 import { ProfileService } from './profile.service';
 
 @Controller('profile')
 export class ProfileController {
-  constructor(
-    private readonly profileService: ProfileService,
-    private readonly menusService: MenusService,
-    private readonly rolesService: RolesService,
-  ) {}
+  constructor(private readonly profileService: ProfileService) {}
 
   @UseGuards(JwtAuthGuard)
   @Get()
