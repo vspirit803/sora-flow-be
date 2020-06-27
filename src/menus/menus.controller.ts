@@ -36,7 +36,7 @@ export class MenusController {
 
   @Get()
   async findAll(@Query() query: QueryMenuDto) {
-    return this.menusService.findAll(query);
+    return this.menusService.findMenuTree(query);
   }
 
   @Post()
