@@ -21,6 +21,9 @@ export class Menu extends BaseSchema {
   @Prop({ default: '' })
   icon: string;
 
+  @Prop({ default: '' })
+  url: string;
+
   @Prop({ default: true })
   enable: boolean;
 

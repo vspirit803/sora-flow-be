@@ -15,9 +15,10 @@ export class CreateMenuDto {
   @Expose()
   readonly type: 'directory' | 'item';
 
+  @IsOptional()
   @IsString()
   @Expose()
-  readonly url: string;
+  readonly url?: string;
 
   @IsOptional()
   @IsMongoId()

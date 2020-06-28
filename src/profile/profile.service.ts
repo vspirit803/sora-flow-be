@@ -15,7 +15,7 @@ export class ProfileService {
 
   async getMenus(query: QueryMenuDto, roleList: Array<string>) {
     const roles = await this.rolesService.findByRoles(roleList); //该用户的角色
-    const menus = await this.menusService.findAll({ ...query, enable: true }); //满足筛选的菜单
+    const menus = await this.menusService.findMenus({ ...query, enable: true }); //满足筛选的菜单
     //授权菜单id集合
     const authorizedOperationSet = new Set<string>();
     roles
