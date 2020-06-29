@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { BaseSchema } from 'src/Common/BaseSchema';
 
 @Schema({
-  toJSON: { getters: true, virtuals: true },
+  toJSON: { getters: true, virtuals: false },
 })
 export class Role extends BaseSchema {
   @Prop()
@@ -11,7 +11,12 @@ export class Role extends BaseSchema {
   @Prop()
   text: string;
 
-  @Prop({ default: [], select: false })
+  @Prop({
+    default: [],
+    get() {
+      return this.authorizedOperationsList ?? this._doc.authorizedOperations;
+    },
+  })
   /**授权操作列表 */
   authorizedOperations: Array<string>;
 

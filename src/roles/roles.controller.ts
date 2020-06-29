@@ -3,16 +3,18 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Patch,
   Post,
   Query,
-  Req,
   UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
+import { User } from 'src/Decorators/user.decorator';
 
 import { ExcludeUndefinedPipe } from '../Pipes/excludeUndefined.pipe';
 import {
@@ -41,13 +43,20 @@ export class RolesController {
     return this.rolesService.findAll(query);
   }
 
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<Role | undefined> {
+    return this.rolesService.findOne(id);
+  }
+
+  @UseGuards(OrganizationAuthGuard)
+  @UsePipes(ExcludeUndefinedPipe)
   @Post()
   async create(
     @Body()
     createRoleDto: CreateRoleDto,
-    @Req() req,
+    @User() user,
   ) {
-    const organizationId = req.user.organizationId;
+    const organizationId = user.organizationId;
     await this.rolesService.create({ organizationId, ...createRoleDto });
   }
 

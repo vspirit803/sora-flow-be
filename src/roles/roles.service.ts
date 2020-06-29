@@ -20,7 +20,7 @@ export class RolesService {
   }
 
   async findAll(query: QueryRoleDto): Promise<Role[]> {
-    return this.roleModel.find(query).exec();
+    return this.roleModel.find(query, { authorizedOperations: false }).exec();
   }
 
   async findOne(id: string): Promise<Role | undefined> {
