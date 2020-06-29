@@ -3,6 +3,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { User } from 'src/Decorators/user.decorator';
 import { QueryMenuDto } from 'src/menus/dto';
+import { QueryRoleDto } from 'src/roles/dto';
 
 import { ProfileService } from './profile.service';
 
@@ -37,5 +38,13 @@ export class ProfileController {
   /**组织列表 */
   getOrganizations(@User() user) {
     return this.profileService.getOrganizations(user.id);
+  }
+
+  @UseGuards(OrganizationAuthGuard)
+  @Get('roles')
+  /**根据组织信息获取角色列表 */
+  async getRoles(@Query() query: QueryRoleDto, @User() user) {
+    const organizationId = user.organizationId;
+    return this.profileService.getRoles(query, organizationId);
   }
 }

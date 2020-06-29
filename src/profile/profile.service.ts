@@ -3,6 +3,7 @@ import { AccountsService } from 'src/accounts/accounts.service';
 import { QueryMenuDto } from 'src/menus/dto';
 import { MenusService } from 'src/menus/menus.service';
 import { transformToTree } from 'src/menus/transformToTree';
+import { QueryRoleDto } from 'src/roles/dto';
 import { RolesService } from 'src/roles/roles.service';
 
 @Injectable()
@@ -46,9 +47,18 @@ export class ProfileService {
     return transformToTree(authorizedMenu);
   }
 
-  async getOrganizations(accountId) {
+  async getOrganizations(accountId: string) {
     return (await this.accountsService.findOne(accountId)).organizations.map(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ({ roles, ...others }) => others,
     );
+  }
+
+  async getRoles(query: QueryRoleDto, organizationId: string) {
+    return this.rolesService.findAll({
+      ...query,
+      type: 'normal',
+      organizationId,
+    });
   }
 }
