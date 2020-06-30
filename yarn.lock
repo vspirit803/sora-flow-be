@@ -911,10 +911,10 @@
     "@types/cookiejar" "*"
     "@types/node" "*"
 
-"@types/supertest@^2.0.8":
-  version "2.0.9"
-  resolved "https://registry.npm.taobao.org/@types/supertest/download/@types/supertest-2.0.9.tgz?cache=0&sync_timestamp=1588362903271&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fsupertest%2Fdownload%2F%40types%2Fsupertest-2.0.9.tgz#049bddbcb0ee0d60a9b836ccc977d813a1c32325"
-  integrity sha1-BJvdvLDuDWCpuDbMyXfYE6HDIyU=
+"@types/supertest@^2.0.10":
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/@types/supertest/-/supertest-2.0.10.tgz#630d79b4d82c73e043e43ff777a9ca98d457cab7"
+  integrity sha512-Xt8TbEyZTnD5Xulw95GLMOkmjGICrOQyJ2jqgkSjAUR3mm7pAIzSR0NFBaMcwlzVvlpCjNwbATcWWwjNiZiFrQ==
   dependencies:
     "@types/superagent" "*"
 
