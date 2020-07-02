@@ -10,6 +10,7 @@ export class CreateRoleDto {
   @Expose()
   readonly text: string;
 
+  @IsOptional()
   @IsArray()
   @IsMongoId({
     each: true,
