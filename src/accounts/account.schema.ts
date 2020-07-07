@@ -46,6 +46,8 @@ export class Account extends BaseSchema {
 }
 
 export const AccountSchema = SchemaFactory.createForClass(Account);
+AccountSchema.set('timestamps', true);
+
 AccountSchema.virtual('organizationList', {
   ref: 'Organization',
   localField: 'organizations.id',

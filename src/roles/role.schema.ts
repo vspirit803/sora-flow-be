@@ -29,6 +29,8 @@ export class Role extends BaseSchema {
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);
+RoleSchema.set('timestamps', true);
+
 RoleSchema.virtual('authorizedOperationsList', {
   ref: 'Menu',
   localField: 'authorizedOperations',

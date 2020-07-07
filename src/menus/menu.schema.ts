@@ -35,3 +35,4 @@ export class Menu extends BaseSchema {
 }
 
 export const MenuSchema = SchemaFactory.createForClass(Menu);
+MenuSchema.set('timestamps', true);

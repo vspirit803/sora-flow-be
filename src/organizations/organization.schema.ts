@@ -19,3 +19,4 @@ export class Organization extends BaseSchema {
 }
 
 export const OrganizationSchema = SchemaFactory.createForClass(Organization);
+OrganizationSchema.set('timestamps', true);

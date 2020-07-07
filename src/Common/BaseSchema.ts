@@ -15,4 +15,10 @@ export class BaseSchema extends Document {
   /**业务唯一标识id */
   @Prop({ default: () => new ObjectId() })
   id: string;
+
+  @Prop()
+  createdAt: Date;
+
+  @Prop()
+  updatedAt: Date;
 }

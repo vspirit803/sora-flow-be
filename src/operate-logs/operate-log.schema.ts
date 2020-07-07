@@ -43,3 +43,4 @@ export class OperateLog extends Document {
 }
 
 export const OperateLogSchema = SchemaFactory.createForClass(OperateLog);
+OperateLogSchema.set('timestamps', true);

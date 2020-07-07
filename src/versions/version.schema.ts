@@ -14,6 +14,8 @@ export class Version extends BaseSchema {
 }
 
 export const VersionSchema = SchemaFactory.createForClass(Version);
+VersionSchema.set('timestamps', true);
+
 VersionSchema.virtual('role', {
   ref: 'Role',
   localField: 'roleId',
