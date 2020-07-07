@@ -1,4 +1,5 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
+import { QueryAccountDto } from 'src/accounts/dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { User } from 'src/Decorators/user.decorator';
@@ -46,5 +47,13 @@ export class ProfileController {
   async getRoles(@Query() query: QueryRoleDto, @User() user) {
     const organizationId = user.organizationId;
     return this.profileService.getRoles(query, organizationId);
+  }
+
+  @UseGuards(OrganizationAuthGuard)
+  @Get('accounts')
+  /**根据组织信息获取账号列表 */
+  async getAccounts(@Query() query: QueryAccountDto, @User() user) {
+    const organizationId = user.organizationId;
+    return this.profileService.getAccounts(query, organizationId);
   }
 }

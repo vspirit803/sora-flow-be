@@ -7,13 +7,13 @@ import {
   Patch,
   Post,
   Query,
-  Req,
   UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
+import { User } from 'src/Decorators/user.decorator';
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ExcludeUndefinedPipe } from '../Pipes/excludeUndefined.pipe';
@@ -49,20 +49,23 @@ export class AccountsController {
   }
 
   @UseGuards(OrganizationAuthGuard)
+  @UsePipes(ExcludeUndefinedPipe)
   @Post()
   async create(
     @Body()
     createAccountDto: CreateAccountDto,
-    @Req() req,
+    @User() user,
   ) {
-    const organizationId = req.user.organizationId;
+    const organizationId = user.organizationId;
     await this.accountsService.create({ organizationId, ...createAccountDto });
   }
 
-  @Patch()
+  @UseGuards(OrganizationAuthGuard)
   @UsePipes(ExcludeUndefinedPipe)
-  async updateOne(@Body() updateAccountDto: UpdateAccountDto) {
-    await this.accountsService.updateOne(updateAccountDto);
+  @Patch()
+  async updateOne(@Body() updateAccountDto: UpdateAccountDto, @User() user) {
+    const organizationId = user.organizationId;
+    await this.accountsService.updateOne(updateAccountDto, organizationId);
   }
 
   @Delete()

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { AccountsService } from 'src/accounts/accounts.service';
+import { QueryAccountDto } from 'src/accounts/dto';
 import { QueryMenuDto } from 'src/menus/dto';
 import { MenusService } from 'src/menus/menus.service';
 import { transformToTree } from 'src/menus/transformToTree';
@@ -60,5 +61,9 @@ export class ProfileService {
       type: 'normal',
       organizationId,
     });
+  }
+
+  async getAccounts(query: QueryAccountDto, organizationId: string) {
+    return this.accountsService.findAll(query, organizationId);
   }
 }

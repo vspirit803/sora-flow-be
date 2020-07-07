@@ -36,30 +36,66 @@ export class AccountsService {
     return createdAccount.save();
   }
 
-  async updateOne(updateAccountDto: UpdateAccountDto) {
-    const { id } = updateAccountDto;
-    await this.accountModel.updateOne({ id }, updateAccountDto);
-    // const { id, organizations, ...others } = updateAccountDto;
-    // await this.accountModel.updateOne({ id }, others);
-    // if(organizations){
-
-    // }
-    // const { id } = updateAccountDto;
-    // for (const key in organizationRoleMap) {
-    //   const rolesList = organizationRoleMap[key];
-    //   await this.accountModel.updateOne(
-    //     { id },
-    //     { ['organizationRoleMap.' + key]: rolesList },
-    //   );
-    // }
+  async updateOne(updateAccountDto: UpdateAccountDto);
+  async updateOne(updateAccountDto: UpdateAccountDto, organizationId: string);
+  async updateOne(updateAccountDto: UpdateAccountDto, organizationId?: string) {
+    const { id, roles = [], ...others } = updateAccountDto;
+    await this.accountModel.updateOne({ id }, others);
+    //更新角色
+    if (roles && organizationId) {
+      await this.accountModel.updateOne(
+        { id, 'organizations.id': organizationId },
+        { $set: { 'organizations.$.roles': roles } },
+      );
+    }
   }
 
   async deleteOne(deleteAccountDto: DeleteAccountDto) {
     await this.accountModel.deleteOne(deleteAccountDto);
   }
 
-  async findAll(query: QueryAccountDto): Promise<Account[]> {
-    return this.accountModel.find(query).populate('role').exec();
+  async findAll(
+    query: QueryAccountDto,
+    organizationId?: string,
+  ): Promise<Account[]> {
+    if (!organizationId) {
+      return this.accountModel.find(query).populate('organizationList').exec();
+    }
+    return this.accountModel
+      .aggregate([
+        { $match: query },
+        { $unwind: '$organizations' },
+        {
+          $match: { 'organizations.id': organizationId },
+        },
+        { $addFields: { roles: '$$ROOT.organizations.roles' } },
+        {
+          $project: {
+            _id: false,
+            __v: false,
+            password: false,
+            organizations: false,
+          },
+        },
+        {
+          $lookup: {
+            from: 'roles',
+            localField: 'roles',
+            foreignField: 'id',
+            as: 'roles',
+          },
+        },
+        {
+          $project: {
+            'roles.authorizedOperations': false,
+            'roles.organizationId': false,
+            'roles.type': false,
+            'roles.__v': false,
+            'roles._id': false,
+          },
+        },
+      ])
+      .exec();
   }
 
   async findOneByNamePassword(

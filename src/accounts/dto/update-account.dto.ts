@@ -35,4 +35,10 @@ export class UpdateAccountDto {
   @ValidateNested({ each: true })
   @Expose()
   readonly organizations: Array<AccountOrganization>;
+
+  @IsOptional()
+  @IsArray()
+  @IsMongoId({ each: true })
+  @Expose()
+  readonly roles: Array<string>;
 }
