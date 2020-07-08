@@ -60,6 +60,12 @@ export class VersionsService {
   }
 
   async deleteOne(deleteVersionDto: DeleteVersionDto) {
+    const version = await this.findOne(deleteVersionDto.id);
+    if (!version) {
+      return;
+    }
+    const roleId = version.roleId;
+    await this.rolesService.deleteOne({ id: roleId });
     await this.versionModel.deleteOne(deleteVersionDto);
   }
 }
