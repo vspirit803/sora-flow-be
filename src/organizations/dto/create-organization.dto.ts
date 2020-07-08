@@ -13,5 +13,5 @@ export class CreateOrganizationDto {
   @IsOptional()
   @IsMongoId()
   @Expose()
-  readonly supervisorId?: string;
+  readonly supervisorId: string;
 }

@@ -50,6 +50,23 @@ export class AccountsService {
     }
   }
 
+  /**
+   * 指定账号加入指定组织
+   * @param id 账号id
+   * @param organizationId 组织id
+   * @param roles 角色id列表
+   */
+  async joinOrganization(
+    id: string,
+    organizationId: string,
+    roles: Array<string>,
+  ) {
+    await this.accountModel.updateOne(
+      { id },
+      { $addToSet: { organizations: { id: organizationId, roles } } },
+    );
+  }
+
   async deleteOne(deleteAccountDto: DeleteAccountDto) {
     await this.accountModel.deleteOne(deleteAccountDto);
   }
@@ -59,7 +76,11 @@ export class AccountsService {
     organizationId?: string,
   ): Promise<Account[]> {
     if (!organizationId) {
-      return this.accountModel.find(query).populate('organizationList').exec();
+      return this.accountModel
+        .find(query)
+        .select({ organizations: false })
+        .exec();
+      // return this.accountModel.find(query).populate('organizationList').exec();
     }
     return this.accountModel
       .aggregate([

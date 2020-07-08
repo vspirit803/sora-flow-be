@@ -13,5 +13,6 @@ import { VersionsService } from './versions.service';
   ],
   controllers: [VersionsController],
   providers: [VersionsService],
+  exports: [VersionsService],
 })
 export class VersionsModule {}
