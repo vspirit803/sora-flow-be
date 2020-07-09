@@ -103,4 +103,11 @@ export class OrganizationsService {
       { $inc: { totalMembers: -1 } },
     );
   }
+
+  async deleteAccount(idList: Array<string>) {
+    await this.organizationModel.updateMany(
+      { id: { $in: idList } },
+      { $inc: { totalMembers: -1 } },
+    );
+  }
 }

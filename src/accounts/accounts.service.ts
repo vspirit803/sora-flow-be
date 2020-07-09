@@ -1,4 +1,10 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { OrganizationsService } from 'src/organizations/organizations.service';
@@ -99,6 +105,9 @@ export class AccountsService {
 
   async removeRole(id: string, organizationId: string, roleId: string) {
     const account = await this.findOne(id);
+    if (!account) {
+      return;
+    }
     if (account.organizations.find((each) => each.id === organizationId)) {
       return this.accountModel.updateOne(
         { id, 'organizations.id': organizationId },
@@ -107,8 +116,25 @@ export class AccountsService {
     }
   }
 
-  async deleteOne(deleteAccountDto: DeleteAccountDto) {
-    await this.accountModel.deleteOne(deleteAccountDto);
+  async deleteOne({ id }: DeleteAccountDto) {
+    const account = await this.findOne(id);
+    //管理的组织
+    const superviseOrganizations = await this.organizationsService.findAll({
+      supervisorId: id,
+    });
+    if (superviseOrganizations.length) {
+      throw new HttpException(
+        `[${account.name}] - [${
+          account.nickname
+        }]还有管理的的组织${superviseOrganizations
+          .map((each) => `[${each.name}]`)
+          .join('/')},无法删除该账号`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const organizationIdList = account.organizations.map((each) => each.id);
+    await this.organizationsService.deleteAccount(organizationIdList);
+    await this.accountModel.deleteOne({ id });
   }
 
   async findAll(
