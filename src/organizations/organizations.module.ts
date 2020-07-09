@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AccountsModule } from 'src/accounts/accounts.module';
 import { OperateLogsModule } from 'src/operate-logs/operate-logs.module';
@@ -14,10 +14,11 @@ import { OrganizationsService } from './organizations.service';
       { name: 'Organization', schema: OrganizationSchema },
     ]),
     OperateLogsModule,
-    AccountsModule,
+    forwardRef(() => AccountsModule),
     VersionsModule,
   ],
   controllers: [OrganizationsController],
   providers: [OrganizationsService],
+  exports: [OrganizationsService],
 })
 export class OrganizationsModule {}

@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { OrganizationsService } from 'src/organizations/organizations.service';
 
 import { Account } from './account.schema';
 import {
@@ -12,7 +13,11 @@ import {
 
 @Injectable()
 export class AccountsService {
-  constructor(@InjectModel('Account') private accountModel: Model<Account>) {}
+  constructor(
+    @InjectModel('Account') private accountModel: Model<Account>,
+    @Inject(forwardRef(() => OrganizationsService))
+    private readonly organizationsService: OrganizationsService,
+  ) {}
 
   async create(createAccountDto: CreateAccountDto): Promise<Account> {
     const {
@@ -32,7 +37,6 @@ export class AccountsService {
         },
       ];
     }
-
     return createdAccount.save();
   }
 
@@ -65,6 +69,42 @@ export class AccountsService {
       { id },
       { $addToSet: { organizations: { id: organizationId, roles } } },
     );
+    await this.organizationsService.addMember(organizationId);
+  }
+
+  /**
+   * 指定账号退出指定组织
+   * @param id 账号id
+   * @param organizationId 组织id
+   */
+  async leaveOrganization(id: string, organizationId: string) {
+    await this.accountModel.updateOne(
+      { id },
+      { $pull: { organizations: { id: organizationId } } },
+    );
+    await this.organizationsService.removeMember(organizationId);
+  }
+
+  async addRole(id: string, organizationId: string, roleId: string) {
+    const account = await this.findOne(id);
+    if (account.organizations.find((each) => each.id === organizationId)) {
+      return this.accountModel.updateOne(
+        { id, 'organizations.id': organizationId },
+        { $addToSet: { 'organizations.$.roles': roleId } },
+      );
+    } else {
+      return this.joinOrganization(id, organizationId, [roleId]);
+    }
+  }
+
+  async removeRole(id: string, organizationId: string, roleId: string) {
+    const account = await this.findOne(id);
+    if (account.organizations.find((each) => each.id === organizationId)) {
+      return this.accountModel.updateOne(
+        { id, 'organizations.id': organizationId },
+        { $pull: { 'organizations.$.roles': roleId } },
+      );
+    }
   }
 
   async deleteOne(deleteAccountDto: DeleteAccountDto) {
@@ -133,5 +173,12 @@ export class AccountsService {
       .populate('organizationRolesList')
       .exec();
     return account;
+  }
+
+  async deleteOrganization(id: string) {
+    await this.accountModel.updateMany(
+      {},
+      { $pull: { organizations: { id } } },
+    );
   }
 }
