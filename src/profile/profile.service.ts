@@ -66,4 +66,8 @@ export class ProfileService {
   async getAccounts(query: QueryAccountDto, organizationId: string) {
     return this.accountsService.findAll(query, organizationId);
   }
+
+  async leaveOrganization(accountId: string, organizationId: string) {
+    return this.accountsService.leaveOrganization(accountId, organizationId);
+  }
 }

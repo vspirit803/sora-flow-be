@@ -1,4 +1,4 @@
-import { Controller, Get, Query, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Query, UseGuards } from '@nestjs/common';
 import { QueryAccountDto } from 'src/accounts/dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
@@ -39,6 +39,13 @@ export class ProfileController {
   /**组织列表 */
   getOrganizations(@User() user) {
     return this.profileService.getOrganizations(user.id);
+  }
+
+  @UseGuards(OrganizationAuthGuard)
+  @Delete('organizations')
+  /**离开组织 */
+  leaveOrganization(@User() user) {
+    return this.profileService.leaveOrganization(user.id, user.organizationId);
   }
 
   @UseGuards(OrganizationAuthGuard)
