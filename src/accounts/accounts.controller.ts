@@ -48,24 +48,19 @@ export class AccountsController {
     return this.accountsService.findOne(id);
   }
 
-  @UseGuards(OrganizationAuthGuard)
   @UsePipes(ExcludeUndefinedPipe)
   @Post()
   async create(
     @Body()
     createAccountDto: CreateAccountDto,
-    @User() user,
   ) {
-    const organizationId = user.organizationId;
-    await this.accountsService.create({ organizationId, ...createAccountDto });
+    await this.accountsService.create(createAccountDto);
   }
 
-  @UseGuards(OrganizationAuthGuard)
   @UsePipes(ExcludeUndefinedPipe)
   @Patch()
-  async updateOne(@Body() updateAccountDto: UpdateAccountDto, @User() user) {
-    const organizationId = user.organizationId;
-    await this.accountsService.updateOne(updateAccountDto, organizationId);
+  async updateOne(@Body() updateAccountDto: UpdateAccountDto) {
+    await this.accountsService.updateOne(updateAccountDto);
   }
 
   @Delete()

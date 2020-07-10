@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { AccountsService } from 'src/accounts/accounts.service';
-import { QueryAccountDto } from 'src/accounts/dto';
+import { QueryAccountDto, UpdateAccountDto } from 'src/accounts/dto';
 import { QueryMenuDto } from 'src/menus/dto';
 import { MenusService } from 'src/menus/menus.service';
 import { transformToTree } from 'src/menus/transformToTree';
@@ -69,5 +69,12 @@ export class ProfileService {
 
   async leaveOrganization(accountId: string, organizationId: string) {
     return this.accountsService.leaveOrganization(accountId, organizationId);
+  }
+
+  async updateAccount(
+    updateAccountDto: UpdateAccountDto,
+    organizationId: string,
+  ) {
+    await this.accountsService.updateOne(updateAccountDto, organizationId);
   }
 }

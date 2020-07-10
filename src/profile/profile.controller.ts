@@ -1,9 +1,19 @@
-import { Controller, Delete, Get, Query, UseGuards } from '@nestjs/common';
-import { QueryAccountDto } from 'src/accounts/dto';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Query,
+  UseGuards,
+  UsePipes,
+} from '@nestjs/common';
+import { QueryAccountDto, UpdateAccountDto } from 'src/accounts/dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { User } from 'src/Decorators/user.decorator';
 import { QueryMenuDto } from 'src/menus/dto';
+import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
 import { QueryRoleDto } from 'src/roles/dto';
 
 import { ProfileService } from './profile.service';
@@ -44,8 +54,11 @@ export class ProfileController {
   @UseGuards(OrganizationAuthGuard)
   @Delete('organizations')
   /**离开组织 */
-  leaveOrganization(@User() user) {
-    return this.profileService.leaveOrganization(user.id, user.organizationId);
+  leaveOrganization(@User() user, @Body() body: { accountId?: string }) {
+    return this.profileService.leaveOrganization(
+      body.accountId ?? user.id,
+      user.organizationId,
+    );
   }
 
   @UseGuards(OrganizationAuthGuard)
@@ -62,5 +75,16 @@ export class ProfileController {
   async getAccounts(@Query() query: QueryAccountDto, @User() user) {
     const organizationId = user.organizationId;
     return this.profileService.getAccounts(query, organizationId);
+  }
+
+  @UseGuards(OrganizationAuthGuard)
+  @UsePipes(ExcludeUndefinedPipe)
+  @Patch('accounts')
+  async updateAccount(
+    @Body() updateAccountDto: UpdateAccountDto,
+    @User() user,
+  ) {
+    const organizationId = user.organizationId;
+    await this.profileService.updateAccount(updateAccountDto, organizationId);
   }
 }
