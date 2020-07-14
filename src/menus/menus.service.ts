@@ -7,6 +7,7 @@ import {
   DeleteMenuDto,
   QueryMenuDto,
   UpdateMenuDto,
+  UpdateMenuOrderDto,
 } from './dto';
 import { Menu } from './menu.schema';
 import { MenuTreeItem, transformToTree } from './transformToTree';
@@ -30,6 +31,7 @@ export class MenusService {
     }
     const menuItems = await this.menuModel
       .find(condition.length ? { $and: condition } : {})
+      .sort({ order: 1 })
       .exec();
     return menuItems;
   }
@@ -70,12 +72,22 @@ export class MenusService {
     const { id, enable, ...others } = updateMenuDto;
     await this.menuModel.updateOne({ id }, others);
     if (enable !== undefined) {
-      //enable/disable node and it's children
       await this.menuModel.updateMany(
         { $or: [{ id }, { idPath: id }] },
         { enable },
       );
     }
+  }
+
+  async updateMenuOrder(updateMenuOrderDto: UpdateMenuOrderDto) {
+    const { menus } = updateMenuOrderDto;
+    await Promise.all(
+      (
+        await this.menuModel.find({ id: { $in: menus } }).select('+_id')
+      ).map((eachMenu) =>
+        eachMenu.set({ order: menus.indexOf(eachMenu.id) }).save(),
+      ),
+    );
   }
 
   private async findOne(id: string): Promise<Menu | undefined> {

@@ -32,6 +32,9 @@ export class Menu extends BaseSchema {
 
   @Prop({ default: true })
   visible: boolean;
+
+  @Prop({ default: 999 })
+  order: number;
 }
 
 export const MenuSchema = SchemaFactory.createForClass(Menu);

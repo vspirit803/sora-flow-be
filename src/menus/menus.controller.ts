@@ -19,6 +19,7 @@ import {
   DeleteMenuDto,
   QueryMenuDto,
   UpdateMenuDto,
+  UpdateMenuOrderDto,
 } from './dto';
 import { MenusService } from './menus.service';
 
@@ -52,6 +53,12 @@ export class MenusController {
   @UsePipes(ExcludeUndefinedPipe)
   async updateOne(@Body() updateMenuDto: UpdateMenuDto) {
     await this.menusService.updateOne(updateMenuDto);
+  }
+
+  @Patch('order')
+  @UsePipes(ExcludeUndefinedPipe)
+  async updateMenuOrder(@Body() updateMenuOrderDto: UpdateMenuOrderDto) {
+    await this.menusService.updateMenuOrder(updateMenuOrderDto);
   }
 
   @Delete()
