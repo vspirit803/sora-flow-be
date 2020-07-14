@@ -45,16 +45,29 @@ export class AuthService {
       (each) => each.id === organizationId,
     ) as unknown) as Organization & {
       name: string;
-      roles: Array<{ id: string; name: string; text: string }>;
+      roles: Array<{
+        id: string;
+        name: string;
+        text: string;
+        type: 'version' | 'normal';
+      }>;
     };
     if (!organization) {
       return null;
     }
+    const organizationRoleId = organization.roles.find(
+      (eachRole) => eachRole.type === 'version',
+    )?.id;
     const payload = {
       name: account.name,
       nickname: account.nickname,
       sub: account.id,
-      roles: organization.roles,
+      roles: organization.roles.map((eachRole) => ({
+        id: eachRole.id,
+        name: eachRole.name,
+        text: eachRole.text,
+      })),
+      organizationRoleId,
       organizationId,
       organizationName: organization.name,
     };

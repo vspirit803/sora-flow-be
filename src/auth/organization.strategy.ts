@@ -26,7 +26,12 @@ export class OrganizationStrategy extends PassportStrategy(
       id: payload.sub,
       name: payload.name,
       nickname: payload.nickname,
-      roles: payload.roles,
+      roles: payload.roles.map((eachRole) => ({
+        id: eachRole.id,
+        name: eachRole.name,
+        text: eachRole.text,
+      })),
+      organizationRoleId: payload.organizationRoleId,
       organizationId: payload.organizationId,
       organizationName: payload.organizationName,
     };
