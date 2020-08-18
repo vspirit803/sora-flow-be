@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AccountsModule } from './accounts/accounts.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ApplicationsModule } from './applications/applications.module';
 import { AuthModule } from './auth/auth.module';
 import { MenusModule } from './menus/menus.module';
 import { LoggerLoginMiddleware } from './Middlewares/logger.login.middleware';
@@ -33,6 +34,7 @@ import { VersionsModule } from './versions/versions.module';
     OrganizationsModule,
     VersionsModule,
     ProfileModule,
+    ApplicationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
