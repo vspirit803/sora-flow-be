@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Patch,
   Post,
   Query,
@@ -15,6 +16,7 @@ import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
 import { User } from 'src/Decorators/user.decorator';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
+import { ValidateIdPipe } from 'src/Pipes/validateId.pipe';
 
 import { ApplicationStatus } from './application.schema';
 import { ApplicationsService } from './applications.service';
@@ -41,6 +43,12 @@ export class ApplicationsController {
   @UsePipes(ExcludeUndefinedPipe)
   async findAll(@Query() query: QueryApplicationDto) {
     return this.applicationsService.findAll(query);
+  }
+
+  @Get(':id')
+  @UsePipes(ValidateIdPipe)
+  async findOne(@Param('id') id: string) {
+    return this.applicationsService.findOne(id);
   }
 
   @UseGuards(OrganizationAuthGuard)
