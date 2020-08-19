@@ -19,11 +19,19 @@ export class Application extends BaseSchema {
   /**所属组织 */
   organization: string;
 
-  @Prop()
+  @Prop({
+    get() {
+      return this.populatedCreator ?? this._doc.creator;
+    },
+  })
   /**创建者 */
   creator: string;
 
-  @Prop()
+  @Prop({
+    get() {
+      return this.populatedLastModifier ?? this._doc.lastModifier;
+    },
+  })
   /**最后修改者 */
   lastModifier?: string;
 
@@ -38,3 +46,17 @@ export class Application extends BaseSchema {
 
 export const ApplicationSchema = SchemaFactory.createForClass(Application);
 ApplicationSchema.set('timestamps', true);
+
+ApplicationSchema.virtual('populatedCreator', {
+  ref: 'Account',
+  localField: 'creator',
+  foreignField: 'id',
+  justOne: true,
+});
+
+ApplicationSchema.virtual('populatedLastModifier', {
+  ref: 'Account',
+  localField: 'lastModifier',
+  foreignField: 'id',
+  justOne: true,
+});

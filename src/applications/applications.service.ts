@@ -17,11 +17,17 @@ export class ApplicationsService {
   ) {}
 
   async findOne(id: string) {
-    return this.applicationModel.findOne({ id });
+    return await this.applicationModel
+      .findOne({ id })
+      .populate('populatedCreator', { nickname: true })
+      .populate('populatedLastModifier', { nickname: true });
   }
 
   async findAll(query: QueryApplicationDto): Promise<Application[]> {
-    return this.applicationModel.find(query).exec();
+    return this.applicationModel
+      .find(query)
+      .select({ formModel: false })
+      .exec();
   }
 
   async create(
