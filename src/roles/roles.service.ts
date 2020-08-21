@@ -41,4 +41,11 @@ export class RolesService {
   async deleteOne(deleteRoleDto: DeleteRoleDto) {
     await this.roleModel.deleteOne(deleteRoleDto);
   }
+
+  async deleteMenu(menuId: string) {
+    await this.roleModel.updateMany(
+      {},
+      { $pull: { authorizedOperations: menuId } },
+    );
+  }
 }

@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { RolesService } from 'src/roles/roles.service';
 
 import {
   CreateMenuDto,
@@ -14,7 +15,10 @@ import { MenuTreeItem, transformToTree } from './transformToTree';
 
 @Injectable()
 export class MenusService {
-  constructor(@InjectModel('Menu') private menuModel: Model<Menu>) {}
+  constructor(
+    @InjectModel('Menu') private menuModel: Model<Menu>,
+    private readonly rolesService: RolesService,
+  ) {}
 
   async findMenuTree(query: QueryMenuDto): Promise<MenuTreeItem[]> {
     return transformToTree(await this.findMenus(query));
@@ -66,6 +70,7 @@ export class MenusService {
   async deleteOne(deleteMenuDto: DeleteMenuDto) {
     const { id } = deleteMenuDto;
     await this.menuModel.deleteMany({ $or: [{ id }, { idPath: id }] });
+    await this.rolesService.deleteMenu(id);
   }
 
   async updateOne(updateMenuDto: UpdateMenuDto) {
