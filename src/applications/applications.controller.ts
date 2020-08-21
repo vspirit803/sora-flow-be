@@ -40,9 +40,13 @@ export class ApplicationsController {
   constructor(private readonly applicationsService: ApplicationsService) {}
 
   @Get()
+  @UseGuards(OrganizationAuthGuard)
   @UsePipes(ExcludeUndefinedPipe)
-  async findAll(@Query() query: QueryApplicationDto) {
-    return this.applicationsService.findAll(query);
+  async findAll(@Query() query: QueryApplicationDto, @User() user) {
+    return this.applicationsService.findAll({
+      organization: user.organizationId as string,
+      ...query,
+    });
   }
 
   @Get(':id')
