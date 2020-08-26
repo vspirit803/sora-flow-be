@@ -7,7 +7,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # test
-      - name: test
-        run: |
-          echo {{ GITHUB_REF }}
+      - name: deploy
+        uses: appleboy/ssh-action@master # 使用ssh连接服务器
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            ./deploy-sora-flow-be.sh ${{ github.ref }}
