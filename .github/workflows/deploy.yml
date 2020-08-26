@@ -1,0 +1,13 @@
+name: deploy app to server
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # test
+      - name: test
+        run: |
+          echo {{ GITHUB_REF }}
