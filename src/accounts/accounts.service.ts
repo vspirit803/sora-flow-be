@@ -36,12 +36,16 @@ export class AccountsService {
     if (organizations) {
       createdAccount.organizations = organizations;
     } else {
-      createdAccount.organizations = [
-        {
-          id: organizationId,
-          roles,
-        },
-      ];
+      if (organizationId) {
+        createdAccount.organizations = [
+          {
+            id: organizationId,
+            roles,
+          },
+        ];
+      } else {
+        createdAccount.organizations = [];
+      }
     }
     return createdAccount.save();
   }
