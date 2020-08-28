@@ -15,6 +15,7 @@ import { OrganizationsModule } from './organizations/organizations.module';
 import { ProfileModule } from './profile/profile.module';
 import { RolesModule } from './roles/roles.module';
 import { VersionsModule } from './versions/versions.module';
+import { ApplicationRecordsModule } from './application-records/application-records.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { VersionsModule } from './versions/versions.module';
     VersionsModule,
     ProfileModule,
     ApplicationsModule,
+    ApplicationRecordsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
