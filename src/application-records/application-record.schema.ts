@@ -10,7 +10,11 @@ export class ApplicationRecord extends BaseSchema {
   /**所属应用 */
   application: string;
 
-  @Prop()
+  @Prop({
+    get: function () {
+      return this.populatedAccount ?? this._doc.account;
+    },
+  })
   /**填写人 */
   account: string;
 

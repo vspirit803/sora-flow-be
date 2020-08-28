@@ -15,7 +15,10 @@ export class ApplicationRecordsService {
   async findAll(
     query: QueryApplicationRecordDto,
   ): Promise<ApplicationRecord[]> {
-    return this.applicationRecordModel.find(query).exec();
+    return this.applicationRecordModel
+      .find(query, { organization: false, application: false })
+      .populate('populatedAccount', { name: true })
+      .exec();
   }
 
   async create(
