@@ -17,7 +17,7 @@ export class ApplicationRecordsService {
   ): Promise<ApplicationRecord[]> {
     return this.applicationRecordModel
       .find(query, { organization: false, application: false })
-      .populate('populatedAccount', { name: true })
+      .populate('populatedAccount', { nickname: true })
       .exec();
   }
 

@@ -51,7 +51,7 @@ export class ApplicationRecordsController {
   ) {
     return this.applicationRecordsService.findAll({
       application: params.applicationId,
-      account: user.id,
+      // account: user.id,
       organization: user.organizationId,
       ...query,
     });
