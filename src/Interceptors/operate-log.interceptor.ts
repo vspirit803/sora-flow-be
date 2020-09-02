@@ -5,6 +5,7 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { Request } from 'express';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { CreateOperateLogDto } from 'src/operate-logs/dto';
@@ -18,7 +19,13 @@ export class OperateLogInterceptor implements NestInterceptor {
   ) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const { body, method, user, ip } = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest() as Request;
+    const { body, method, user } = request;
+    const ip =
+      (request.headers['x-forwarded-for'] as string) ||
+      request.connection.remoteAddress ||
+      request.socket.remoteAddress ||
+      '';
     if (method === 'GET') {
       return next.handle();
     }
@@ -45,7 +52,7 @@ export class OperateLogInterceptor implements NestInterceptor {
       ip,
       operateTarget,
       operateType,
-      user,
+      user: user as Account,
     };
     return next.handle().pipe(
       tap(() => {

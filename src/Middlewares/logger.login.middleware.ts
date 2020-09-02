@@ -5,7 +5,12 @@ import { Request, Response } from 'express';
 @Injectable()
 export class LoggerLoginMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: Function) {
-    console.log(req.ip, req.body.name);
+    const ip =
+      (req.headers['x-forwarded-for'] as string) ||
+      req.connection.remoteAddress ||
+      req.socket.remoteAddress ||
+      '';
+    console.log(ip, req.body.name);
     next();
   }
 }
