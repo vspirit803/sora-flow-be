@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { ApplicationRecordsController } from './application-records.controller';
 
 describe('ApplicationRecordsController', () => {

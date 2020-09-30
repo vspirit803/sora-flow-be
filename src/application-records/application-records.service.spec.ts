@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { ApplicationRecordsService } from './application-records.service';
 
 describe('ApplicationRecordsService', () => {

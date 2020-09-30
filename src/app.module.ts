@@ -5,8 +5,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AccountsModule } from './accounts/accounts.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ApplicationRecordsModule } from './application-records/application-records.module';
 import { ApplicationsModule } from './applications/applications.module';
 import { AuthModule } from './auth/auth.module';
+import { DepartmentsModule } from './departments/departments.module';
 import { MenusModule } from './menus/menus.module';
 import { LoggerLoginMiddleware } from './Middlewares/logger.login.middleware';
 import { LoggerMiddleware } from './Middlewares/logger.middleware';
@@ -15,7 +17,6 @@ import { OrganizationsModule } from './organizations/organizations.module';
 import { ProfileModule } from './profile/profile.module';
 import { RolesModule } from './roles/roles.module';
 import { VersionsModule } from './versions/versions.module';
-import { ApplicationRecordsModule } from './application-records/application-records.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { ApplicationRecordsModule } from './application-records/application-reco
     ProfileModule,
     ApplicationsModule,
     ApplicationRecordsModule,
+    DepartmentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
