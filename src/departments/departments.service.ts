@@ -7,6 +7,7 @@ import {
   CreateDepartmentDto,
   DeleteDepartmentDto,
   QueryDepartmentDto,
+  UpdateDepartmentDto,
 } from './dto';
 import { DepartmentVo } from './vo/department.vo';
 
@@ -62,6 +63,11 @@ export class DepartmentsService {
       const createdDepartment = new this.departmentModel(createDepartmentDto);
       createdDepartment.save();
     }
+  }
+
+  async updateOne(updateDepartmentDto: UpdateDepartmentDto) {
+    const { id } = updateDepartmentDto;
+    await this.departmentModel.updateOne({ id }, updateDepartmentDto);
   }
 
   async deleteOne(deleteDepartmentDto: DeleteDepartmentDto) {

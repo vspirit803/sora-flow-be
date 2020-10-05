@@ -1,7 +1,7 @@
 import { Expose } from 'class-transformer';
 import { IsMongoId, IsOptional, IsString } from 'class-validator';
 
-export class UpdateOrganizationDto {
+export class UpdateDepartmentDto {
   @IsMongoId()
   @Expose()
   readonly id: string;
@@ -10,11 +10,6 @@ export class UpdateOrganizationDto {
   @IsString()
   @Expose()
   readonly name?: string;
-
-  // @IsOptional()
-  // @IsMongoId()
-  // @Expose()
-  // readonly organization?: string;
 
   @IsOptional()
   @IsMongoId()

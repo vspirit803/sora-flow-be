@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -20,6 +21,7 @@ import {
   CreateDepartmentDto,
   DeleteDepartmentDto,
   QueryDepartmentDto,
+  UpdateDepartmentDto,
 } from './dto';
 
 @UsePipes(
@@ -56,6 +58,13 @@ export class DepartmentsController {
       organization,
       ...createDepartmentDto,
     });
+  }
+
+  @Patch()
+  @UseGuards(OrganizationAuthGuard)
+  @UsePipes(ExcludeUndefinedPipe)
+  async updateOne(@Body() updateDepartmentDto: UpdateDepartmentDto) {
+    return this.departmentsService.updateOne(updateDepartmentDto);
   }
 
   @Delete()
