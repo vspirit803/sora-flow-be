@@ -3,7 +3,10 @@ import { isMongoId } from 'class-validator';
 
 @Injectable()
 export class ValidateIdPipe implements PipeTransform {
-  transform(value): any {
+  transform(value, metadata): any {
+    if (metadata.type !== 'param' || metadata.data !== 'id') {
+      return value;
+    }
     if (isMongoId(value)) {
       return value;
     } else {
