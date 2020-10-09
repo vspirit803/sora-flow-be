@@ -11,3 +11,7 @@ export function UseOperateLog(operateName: string) {
     UseInterceptors(OperateLogInterceptor),
   );
 }
+
+export function UseOperateLogMethod(operateName: string) {
+  return applyDecorators(SetMetadata('operateTarget', operateName));
+}
