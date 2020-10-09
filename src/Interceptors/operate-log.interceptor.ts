@@ -29,10 +29,10 @@ export class OperateLogInterceptor implements NestInterceptor {
     if (method === 'GET') {
       return next.handle();
     }
-    const operateTarget = this.reflector.get<string>(
-      'operateTarget',
-      context.getClass(),
-    );
+
+    const operateTarget =
+      this.reflector.get<string>('operateTarget', context.getHandler()) ??
+      this.reflector.get<string>('operateTarget', context.getClass());
     let operateType: 'create' | 'update' | 'delete' | 'unknown';
     switch (method) {
       case 'POST':
