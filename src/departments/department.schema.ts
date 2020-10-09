@@ -21,12 +21,36 @@ export class Department extends BaseSchema {
   @Prop()
   organization: string;
 
-  @Prop()
+  @Prop({
+    get() {
+      return this.supervisorInfo ?? this._doc.supervisor;
+    },
+  })
   supervisor: string;
 
-  @Prop({ default: [] })
+  @Prop({
+    default: [],
+    get() {
+      return this.membersInfo ?? this._doc.members;
+    },
+  })
   members: Array<string>;
 }
 
 export const DepartmentSchema = SchemaFactory.createForClass(Department);
 DepartmentSchema.set('timestamps', true);
+
+DepartmentSchema.virtual('supervisorInfo', {
+  ref: 'Account',
+  localField: 'supervisor',
+  foreignField: 'id',
+  options: { select: { id: true, name: true, nickname: true } },
+  justOne: true,
+});
+
+DepartmentSchema.virtual('membersInfo', {
+  ref: 'Account',
+  localField: 'members',
+  foreignField: 'id',
+  options: { select: { id: true, name: true, nickname: true } },
+});

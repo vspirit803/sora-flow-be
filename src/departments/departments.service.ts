@@ -40,13 +40,21 @@ export class DepartmentsService {
     return transformToTree(departments);
   }
 
-  private async findOne(id: string): Promise<Department | undefined> {
+  private async findParent(id: string): Promise<Department | undefined> {
     return this.departmentModel.findOne({ id }).exec();
+  }
+
+  async findOne(id: string): Promise<Department | undefined> {
+    return this.departmentModel
+      .findOne({ id })
+      .populate('supervisorInfo')
+      .populate('membersInfo')
+      .exec();
   }
 
   async create(createDepartmentDto: CreateDepartmentDto) {
     if (createDepartmentDto.parentId) {
-      const parent = await this.findOne(createDepartmentDto.parentId);
+      const parent = await this.findParent(createDepartmentDto.parentId);
       if (!parent) {
         throw new HttpException('不存在的parentId', HttpStatus.BAD_REQUEST);
       }
@@ -58,20 +66,47 @@ export class DepartmentsService {
         idPath: [...idPath, id],
         namePath: [...namePath, name],
       });
+      createdDepartment.members = [createDepartmentDto.supervisor];
       createdDepartment.save();
     } else {
       const createdDepartment = new this.departmentModel(createDepartmentDto);
+      createdDepartment.members = [createDepartmentDto.supervisor];
       createdDepartment.save();
     }
   }
 
   async updateOne(updateDepartmentDto: UpdateDepartmentDto) {
     const { id } = updateDepartmentDto;
+    if (updateDepartmentDto.supervisor) {
+      await this.addMembers(id, [updateDepartmentDto.supervisor]);
+    }
     await this.departmentModel.updateOne({ id }, updateDepartmentDto);
   }
 
   async deleteOne(deleteDepartmentDto: DeleteDepartmentDto) {
     const { id } = deleteDepartmentDto;
     await this.departmentModel.deleteMany({ $or: [{ id }, { idPath: id }] });
+  }
+
+  async findMembers(id: string) {
+    const department = await this.departmentModel
+      .findOne({ id })
+      .populate('membersInfo')
+      .exec();
+    return department.members;
+  }
+
+  async addMembers(id: string, members: Array<string>) {
+    await this.departmentModel.updateOne(
+      { id },
+      { $addToSet: { members: { $each: members } } },
+    );
+  }
+
+  async removeMember(id: string, member: string) {
+    await this.departmentModel.updateOne(
+      { id },
+      { $pull: { members: member } },
+    );
   }
 }

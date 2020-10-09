@@ -9,12 +9,11 @@ export class CreateDepartmentDto {
   @IsOptional()
   @IsMongoId()
   @Expose()
-  readonly organization: string;
+  readonly organization?: string;
 
-  @IsOptional()
   @IsMongoId()
   @Expose()
-  readonly supervisor?: string;
+  readonly supervisor: string;
 
   @IsOptional()
   @IsMongoId()
