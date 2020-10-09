@@ -15,4 +15,11 @@ export class OperateLogsService {
     const createdOperateLog = new this.operateLogModel(createOperateLogDto);
     return createdOperateLog.save();
   }
+
+  async getCount() {
+    const count = await this.operateLogModel.countDocuments({
+      operateTarget: '菜单',
+    });
+    return count;
+  }
 }
