@@ -18,10 +18,11 @@ export class Department extends BaseSchema {
   @Prop({ default: '' })
   parentName: string;
 
-  @Prop()
+  @Prop({ required: true })
   organization: string;
 
   @Prop({
+    required: true,
     get() {
       return this.supervisorInfo ?? this._doc.supervisor;
     },

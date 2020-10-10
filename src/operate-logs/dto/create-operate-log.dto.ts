@@ -1,9 +1,15 @@
 import { Expose } from 'class-transformer';
 import { IsIP, IsObject, IsOptional, IsString } from 'class-validator';
+import { Account } from 'src/accounts/account.schema';
 
 export class CreateOperateLogDto {
   @Expose()
   user: Account;
+
+  @IsOptional()
+  @IsString()
+  @Expose()
+  organizationId: string;
 
   @IsOptional()
   @IsString()
