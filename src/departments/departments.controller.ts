@@ -58,7 +58,6 @@ export class DepartmentsController {
     @User() user,
   ) {
     const organization = user.organizationId;
-    console.log(createDepartmentDto);
 
     return this.departmentsService.create({
       organization,

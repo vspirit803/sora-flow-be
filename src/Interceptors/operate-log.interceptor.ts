@@ -8,6 +8,7 @@ import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Account } from 'src/accounts/account.schema';
 import { CreateOperateLogDto } from 'src/operate-logs/dto';
 import { OperateLogsService } from 'src/operate-logs/operate-logs.service';
 
@@ -53,6 +54,8 @@ export class OperateLogInterceptor implements NestInterceptor {
       operateTarget,
       operateType,
       user: user as Account,
+      organizationId: (user as Account & { organizationId: string })
+        .organizationId,
     };
     return next.handle().pipe(
       tap(() => {

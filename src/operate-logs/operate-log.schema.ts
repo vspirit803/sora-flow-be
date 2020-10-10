@@ -14,11 +14,11 @@ export class OperateLog extends Document {
   @Prop({ required: false, select: false })
   __v: number;
 
-  @Prop({ required: false, default: () => new Date() })
-  timestamp?: Date;
-
   @Prop()
   user: Account;
+
+  @Prop()
+  organizationId: string;
 
   @Prop()
   operateType: 'create' | 'update' | 'delete' | 'unknown';

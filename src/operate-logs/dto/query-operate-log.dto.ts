@@ -1,7 +1,13 @@
 import { Expose } from 'class-transformer';
 import { IsIP, IsOptional, IsString } from 'class-validator';
+import { BaseQueryDto } from 'src/Common/BaseQueryDto';
 
-export class QueryOperateLogDto {
+export class QueryOperateLogDto extends BaseQueryDto {
+  @IsOptional()
+  @IsString()
+  @Expose()
+  organizationId?: string;
+
   @IsOptional()
   @IsString()
   @Expose()
