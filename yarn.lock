@@ -7575,10 +7575,10 @@ ts-jest@25.5.1:
     semver "6.x"
     yargs-parser "18.x"
 
-ts-loader@^8.0.9:
-  version "8.0.9"
-  resolved "https://registry.npm.taobao.org/ts-loader/download/ts-loader-8.0.9.tgz#890fc25f49a99124268f4e738ed22d00f666dc37"
-  integrity sha1-iQ/CX0mpkSQmj05zjtItAPZm3Dc=
+ts-loader@^8.0.10:
+  version "8.0.10"
+  resolved "https://registry.npm.taobao.org/ts-loader/download/ts-loader-8.0.10.tgz#4af4afb8d26847290cd010df93a4c172df92278f"
+  integrity sha1-SvSvuNJoRykM0BDfk6TBct+SJ48=
   dependencies:
     chalk "^2.3.0"
     enhanced-resolve "^4.0.0"
