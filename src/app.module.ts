@@ -17,6 +17,7 @@ import { OrganizationsModule } from './organizations/organizations.module';
 import { ProfileModule } from './profile/profile.module';
 import { RolesModule } from './roles/roles.module';
 import { VersionsModule } from './versions/versions.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { VersionsModule } from './versions/versions.module';
     ApplicationsModule,
     ApplicationRecordsModule,
     DepartmentsModule,
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
