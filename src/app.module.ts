@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AccountsModule } from './accounts/accounts.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ApplicationRecordCollectionTasksModule } from './application-record-collection-tasks/application-record-collection-tasks.module';
 import { ApplicationRecordsModule } from './application-records/application-records.module';
 import { ApplicationsModule } from './applications/applications.module';
 import { AuthModule } from './auth/auth.module';
@@ -16,8 +17,8 @@ import { OperateLogsModule } from './operate-logs/operate-logs.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { ProfileModule } from './profile/profile.module';
 import { RolesModule } from './roles/roles.module';
-import { VersionsModule } from './versions/versions.module';
 import { TasksModule } from './tasks/tasks.module';
+import { VersionsModule } from './versions/versions.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { TasksModule } from './tasks/tasks.module';
     ApplicationRecordsModule,
     DepartmentsModule,
     TasksModule,
+    ApplicationRecordCollectionTasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

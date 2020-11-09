@@ -1,9 +1,8 @@
 import { Expose } from 'class-transformer';
 import { IsMongoId, IsOptional } from 'class-validator';
-import { Types } from 'mongoose';
 import { BaseQueryDto } from 'src/Common/BaseQueryDto';
 
-export class QueryTaskDto extends BaseQueryDto {
+export class QueryApplicationRecordCollectionTaskDto extends BaseQueryDto {
   @IsOptional()
   @IsMongoId()
   @Expose()
@@ -17,17 +16,14 @@ export class QueryTaskDto extends BaseQueryDto {
   @IsOptional()
   @IsMongoId()
   @Expose()
-  readonly account?: string;
+  readonly publisher?: string;
 
   @IsOptional()
+  @IsMongoId()
   @Expose()
-  readonly type?: string;
+  readonly application?: string;
 
   @IsOptional()
   @Expose()
   readonly status?: string;
-
-  @IsOptional()
-  @Expose()
-  readonly metadata?: Record<string, string>;
 }

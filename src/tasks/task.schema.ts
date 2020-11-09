@@ -55,10 +55,3 @@ TaskSchema.virtual('populatedAccount', {
   foreignField: 'id',
   justOne: true,
 });
-
-TaskSchema.virtual('populatedOrganization', {
-  ref: 'Organization',
-  localField: 'organization',
-  foreignField: 'id',
-  justOne: true,
-});
