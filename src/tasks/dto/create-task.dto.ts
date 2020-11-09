@@ -24,5 +24,5 @@ export class CreateTaskDto {
   finalTime: Date;
 
   @Expose()
-  readonly metadata: Types.Map<any>;
+  readonly metadata: Record<string, string>;
 }
