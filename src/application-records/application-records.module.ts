@@ -6,11 +6,7 @@ import { ApplicationRecordsController } from './application-records.controller';
 import { ApplicationRecordsService } from './application-records.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      { name: 'ApplicationRecord', schema: ApplicationRecordSchema },
-    ]),
-  ],
+  imports: [MongooseModule.forFeature([{ name: 'ApplicationRecord', schema: ApplicationRecordSchema }])],
   controllers: [ApplicationRecordsController],
   providers: [ApplicationRecordsService],
 })

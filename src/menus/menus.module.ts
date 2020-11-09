@@ -7,10 +7,7 @@ import { MenusController } from './menus.controller';
 import { MenusService } from './menus.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'Menu', schema: MenuSchema }]),
-    RolesModule,
-  ],
+  imports: [MongooseModule.forFeature([{ name: 'Menu', schema: MenuSchema }]), RolesModule],
   controllers: [MenusController],
   providers: [MenusService],
   exports: [MenusService],

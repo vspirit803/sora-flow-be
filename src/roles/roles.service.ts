@@ -2,12 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import {
-  CreateRoleDto,
-  DeleteRoleDto,
-  QueryRoleDto,
-  UpdateRoleDto,
-} from './dto';
+import { CreateRoleDto, DeleteRoleDto, QueryRoleDto, UpdateRoleDto } from './dto';
 import { Role } from './role.schema';
 
 @Injectable()
@@ -28,9 +23,7 @@ export class RolesService {
   }
 
   async findByRoles(roles: Array<string>) {
-    return this.roleModel
-      .find({ id: { $in: roles } }, { authorizedOperations: true })
-      .exec();
+    return this.roleModel.find({ id: { $in: roles } }, { authorizedOperations: true }).exec();
   }
 
   async updateOne(updateRoleDto: UpdateRoleDto) {
@@ -43,9 +36,6 @@ export class RolesService {
   }
 
   async deleteMenu(menuId: string) {
-    await this.roleModel.updateMany(
-      {},
-      { $pull: { authorizedOperations: menuId } },
-    );
+    await this.roleModel.updateMany({}, { $pull: { authorizedOperations: menuId } });
   }
 }

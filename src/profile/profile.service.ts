@@ -29,9 +29,7 @@ export class ProfileService {
       });
 
     //授权菜单项
-    const authorizedMenuItems = menus.filter((eachMenu) =>
-      authorizedOperationSet.has(eachMenu.id),
-    );
+    const authorizedMenuItems = menus.filter((eachMenu) => authorizedOperationSet.has(eachMenu.id));
     //授权菜单集合
     const authorizedMenuSet = new Set<string>();
     authorizedMenuItems.forEach((eachMenuItem) => {
@@ -71,10 +69,7 @@ export class ProfileService {
     return this.accountsService.leaveOrganization(accountId, organizationId);
   }
 
-  async updateAccount(
-    updateAccountDto: UpdateAccountDto,
-    organizationId: string,
-  ) {
+  async updateAccount(updateAccountDto: UpdateAccountDto, organizationId: string) {
     await this.accountsService.updateOne(updateAccountDto, organizationId);
   }
 }

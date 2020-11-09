@@ -47,9 +47,7 @@ export class ApplicationRecordCollectionTask extends BaseSchema {
   tasks: Array<string>;
 }
 
-export const ApplicationRecordCollectionTaskSchema = SchemaFactory.createForClass(
-  ApplicationRecordCollectionTask,
-);
+export const ApplicationRecordCollectionTaskSchema = SchemaFactory.createForClass(ApplicationRecordCollectionTask);
 ApplicationRecordCollectionTaskSchema.set('timestamps', true);
 
 ApplicationRecordCollectionTaskSchema.virtual('populatedOrganization', {

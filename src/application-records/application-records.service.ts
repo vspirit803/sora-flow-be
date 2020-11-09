@@ -12,21 +12,15 @@ export class ApplicationRecordsService {
     private applicationRecordModel: Model<ApplicationRecord>,
   ) {}
 
-  async findAll(
-    query: QueryApplicationRecordDto,
-  ): Promise<ApplicationRecord[]> {
+  async findAll(query: QueryApplicationRecordDto): Promise<ApplicationRecord[]> {
     return this.applicationRecordModel
       .find(query, { organization: false, application: false })
       .populate('populatedAccount', { nickname: true })
       .exec();
   }
 
-  async create(
-    createApplicationRecordDto: CreateApplicationRecordDto,
-  ): Promise<ApplicationRecord> {
-    const createdApplicationRecord = new this.applicationRecordModel(
-      createApplicationRecordDto,
-    );
+  async create(createApplicationRecordDto: CreateApplicationRecordDto): Promise<ApplicationRecord> {
+    const createdApplicationRecord = new this.applicationRecordModel(createApplicationRecordDto);
     return createdApplicationRecord.save();
   }
 }

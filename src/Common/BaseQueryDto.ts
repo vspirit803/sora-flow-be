@@ -1,11 +1,10 @@
-import { Expose, plainToClass, Transform } from 'class-transformer';
+import { Expose, Transform } from 'class-transformer';
 import {
   IsNumber,
   IsOptional,
   IsString,
   Min,
   Validate,
-  validate,
   ValidateNested,
   ValidationArguments,
   ValidatorConstraint,
@@ -68,10 +67,7 @@ export class BaseQueryDto {
     let key = 'createdAt',
       order = 'DESC';
     try {
-      const {
-        key: realKey = 'createdAt',
-        order: realOrder = 'DESC',
-      } = JSON.parse(value);
+      const { key: realKey = 'createdAt', order: realOrder = 'DESC' } = JSON.parse(value);
       key = realKey;
       order = realOrder;
     } catch (error) {}
@@ -101,10 +97,3 @@ export class BaseQueryDto {
   })
   pagination: Pagination;
 }
-
-// const plainJson = {};
-// const result = plainToClass(BaseQueryDto, plainJson);
-// console.log(result);
-// validate(result).then((response) => {
-//   console.log(response);
-// });

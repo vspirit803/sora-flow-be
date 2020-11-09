@@ -4,12 +4,7 @@ import { Model } from 'mongoose';
 import { CreateRoleDto } from 'src/roles/dto';
 import { RolesService } from 'src/roles/roles.service';
 
-import {
-  CreateVersionDto,
-  DeleteVersionDto,
-  QueryVersionDto,
-  UpdateVersionDto,
-} from './dto';
+import { CreateVersionDto, DeleteVersionDto, QueryVersionDto, UpdateVersionDto } from './dto';
 import { Version } from './version.schema';
 
 @Injectable()
@@ -19,10 +14,7 @@ export class VersionsService {
     private readonly rolesService: RolesService,
   ) {}
 
-  async create(
-    createVersionDto: CreateVersionDto,
-    organizationId: string,
-  ): Promise<Version> {
+  async create(createVersionDto: CreateVersionDto, organizationId: string): Promise<Version> {
     const { authorizedOperations } = createVersionDto;
     const createRoleDto: CreateRoleDto = {
       name: 'admin',

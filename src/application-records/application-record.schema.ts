@@ -27,9 +27,7 @@ export class ApplicationRecord extends BaseSchema {
   data: SchemaType;
 }
 
-export const ApplicationRecordSchema = SchemaFactory.createForClass(
-  ApplicationRecord,
-);
+export const ApplicationRecordSchema = SchemaFactory.createForClass(ApplicationRecord);
 ApplicationRecordSchema.set('timestamps', true);
 
 ApplicationRecordSchema.virtual('populatedApplication', {

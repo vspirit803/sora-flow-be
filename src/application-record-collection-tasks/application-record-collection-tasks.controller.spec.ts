@@ -10,9 +10,7 @@ describe('ApplicationRecordCollectionTasksController', () => {
       controllers: [ApplicationRecordCollectionTasksController],
     }).compile();
 
-    controller = module.get<ApplicationRecordCollectionTasksController>(
-      ApplicationRecordCollectionTasksController,
-    );
+    controller = module.get<ApplicationRecordCollectionTasksController>(ApplicationRecordCollectionTasksController);
   });
 
   it('should be defined', () => {

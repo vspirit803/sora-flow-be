@@ -7,11 +7,7 @@ import { OperateLogsService } from './operate-logs.service';
 
 @Global()
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      { name: 'OperateLog', schema: OperateLogSchema },
-    ]),
-  ],
+  imports: [MongooseModule.forFeature([{ name: 'OperateLog', schema: OperateLogSchema }])],
   providers: [OperateLogsService],
   controllers: [OperateLogsController],
   exports: [OperateLogsService],

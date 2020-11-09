@@ -1,6 +1,5 @@
 import { Expose } from 'class-transformer';
 import { IsMongoId, IsOptional } from 'class-validator';
-import { Types } from 'mongoose';
 import { BaseQueryDto } from 'src/Common/BaseQueryDto';
 
 export class QueryTaskDto extends BaseQueryDto {

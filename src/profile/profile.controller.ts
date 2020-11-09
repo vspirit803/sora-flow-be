@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Patch,
-  Query,
-  UseGuards,
-  UsePipes,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Query, UseGuards, UsePipes } from '@nestjs/common';
 import { QueryAccountDto, UpdateAccountDto } from 'src/accounts/dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
@@ -55,10 +46,7 @@ export class ProfileController {
   @Delete('organizations')
   /**离开组织 */
   leaveOrganization(@User() user, @Body() body: { accountId?: string }) {
-    return this.profileService.leaveOrganization(
-      body.accountId ?? user.id,
-      user.organizationId,
-    );
+    return this.profileService.leaveOrganization(body.accountId ?? user.id, user.organizationId);
   }
 
   @UseGuards(OrganizationAuthGuard)
@@ -80,10 +68,7 @@ export class ProfileController {
   @UseGuards(OrganizationAuthGuard)
   @UsePipes(ExcludeUndefinedPipe)
   @Patch('accounts')
-  async updateAccount(
-    @Body() updateAccountDto: UpdateAccountDto,
-    @User() user,
-  ) {
+  async updateAccount(@Body() updateAccountDto: UpdateAccountDto, @User() user) {
     const organizationId = user.organizationId;
     await this.profileService.updateAccount(updateAccountDto, organizationId);
   }

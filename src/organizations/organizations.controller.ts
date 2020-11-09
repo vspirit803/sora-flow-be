@@ -15,12 +15,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
 
-import {
-  CreateOrganizationDto,
-  DeleteOrganizationDto,
-  QueryOrganizationDto,
-  UpdateOrganizationDto,
-} from './dto';
+import { CreateOrganizationDto, DeleteOrganizationDto, QueryOrganizationDto, UpdateOrganizationDto } from './dto';
 import { OrganizationsService } from './organizations.service';
 
 @UsePipes(

@@ -4,12 +4,7 @@ import { Model } from 'mongoose';
 import { AccountsService } from 'src/accounts/accounts.service';
 import { VersionsService } from 'src/versions/versions.service';
 
-import {
-  CreateOrganizationDto,
-  DeleteOrganizationDto,
-  QueryOrganizationDto,
-  UpdateOrganizationDto,
-} from './dto';
+import { CreateOrganizationDto, DeleteOrganizationDto, QueryOrganizationDto, UpdateOrganizationDto } from './dto';
 import { Organization } from './organization.schema';
 
 @Injectable()
@@ -21,34 +16,21 @@ export class OrganizationsService {
     private readonly versionsService: VersionsService,
   ) {}
 
-  async create(
-    createOrganizationDto: CreateOrganizationDto,
-  ): Promise<Organization> {
-    const createdOrganization = new this.organizationModel(
-      createOrganizationDto,
-    );
+  async create(createOrganizationDto: CreateOrganizationDto): Promise<Organization> {
+    const createdOrganization = new this.organizationModel(createOrganizationDto);
     const organizationId = createdOrganization.id;
     const { supervisorId, versionId } = createOrganizationDto;
     const version = await this.versionsService.findOne(versionId);
     const { roleId } = version;
-    this.accountsService.joinOrganization(supervisorId, organizationId, [
-      roleId,
-    ]);
+    this.accountsService.joinOrganization(supervisorId, organizationId, [roleId]);
 
     return createdOrganization.save();
   }
 
   async updateOne(updateOrganizationDto: UpdateOrganizationDto) {
-    const {
-      id,
-      supervisorId: newSupervisorId,
-      versionId: newVersionId,
-    } = updateOrganizationDto;
+    const { id, supervisorId: newSupervisorId, versionId: newVersionId } = updateOrganizationDto;
     const organization = await this.findOne(id);
-    const {
-      supervisorId: oldSupervisorId,
-      versionId: oldVersionId,
-    } = organization;
+    const { supervisorId: oldSupervisorId, versionId: oldVersionId } = organization;
 
     if (
       (newVersionId && newVersionId !== oldVersionId) || //修改版本
@@ -64,11 +46,7 @@ export class OrganizationsService {
         const newVersion = await this.versionsService.findOne(newVersionId);
         newRoleId = newVersion.roleId;
       }
-      await this.accountsService.addRole(
-        newSupervisorId ?? oldSupervisorId,
-        id,
-        newRoleId ?? oldRoleId,
-      );
+      await this.accountsService.addRole(newSupervisorId ?? oldSupervisorId, id, newRoleId ?? oldRoleId);
     }
     await this.organizationModel.updateOne({ id }, updateOrganizationDto);
   }
@@ -83,31 +61,18 @@ export class OrganizationsService {
   }
 
   async findAll(query: QueryOrganizationDto): Promise<Organization[]> {
-    return this.organizationModel
-      .find(query)
-      .populate('supervisorInfo')
-      .populate('versionInfo')
-      .exec();
+    return this.organizationModel.find(query).populate('supervisorInfo').populate('versionInfo').exec();
   }
 
   async addMember(id: string) {
-    return this.organizationModel.updateOne(
-      { id },
-      { $inc: { totalMembers: 1 } },
-    );
+    return this.organizationModel.updateOne({ id }, { $inc: { totalMembers: 1 } });
   }
 
   async removeMember(id: string) {
-    return this.organizationModel.updateOne(
-      { id },
-      { $inc: { totalMembers: -1 } },
-    );
+    return this.organizationModel.updateOne({ id }, { $inc: { totalMembers: -1 } });
   }
 
   async deleteAccount(idList: Array<string>) {
-    await this.organizationModel.updateMany(
-      { id: { $in: idList } },
-      { $inc: { totalMembers: -1 } },
-    );
+    await this.organizationModel.updateMany({ id: { $in: idList } }, { $inc: { totalMembers: -1 } });
   }
 }

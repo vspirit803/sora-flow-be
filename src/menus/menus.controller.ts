@@ -1,26 +1,9 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Patch,
-  Post,
-  Query,
-  UseGuards,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
 
-import {
-  CreateMenuDto,
-  DeleteMenuDto,
-  QueryMenuDto,
-  UpdateMenuDto,
-  UpdateMenuOrderDto,
-} from './dto';
+import { CreateMenuDto, DeleteMenuDto, QueryMenuDto, UpdateMenuDto, UpdateMenuOrderDto } from './dto';
 import { MenusService } from './menus.service';
 
 @UsePipes(

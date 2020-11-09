@@ -10,9 +10,7 @@ import { OrganizationsService } from './organizations.service';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: 'Organization', schema: OrganizationSchema },
-    ]),
+    MongooseModule.forFeature([{ name: 'Organization', schema: OrganizationSchema }]),
     OperateLogsModule,
     forwardRef(() => AccountsModule),
     VersionsModule,
