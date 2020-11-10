@@ -12,11 +12,14 @@ export class CreateTaskDto {
   @Expose()
   readonly account?: string;
 
+  @IsString()
   @Expose()
   readonly type: string;
 
+  @IsOptional()
+  @IsString()
   @Expose()
-  readonly status: string;
+  readonly status?: string;
 
   @Expose()
   /**截止时间 */

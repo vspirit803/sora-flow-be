@@ -17,6 +17,11 @@ export class CreateApplicationRecordDto {
   @Expose()
   readonly organization?: string;
 
+  @IsOptional()
+  @IsMongoId()
+  @Expose()
+  readonly task?: string;
+
   @Expose()
   readonly data: Record<string, any>;
 }
