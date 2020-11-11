@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
@@ -6,7 +6,7 @@ import { User } from 'src/Decorators/user.decorator';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
 
 import { ApplicationRecordsService } from './application-records.service';
-import { CreateApplicationRecordDto, QueryApplicationRecordDto } from './dto';
+import { CreateApplicationRecordDto, QueryApplicationRecordDto, UpdateApplicationRecordDto } from './dto';
 
 @UsePipes(
   new ValidationPipe({
@@ -48,18 +48,15 @@ export class ApplicationRecordsController {
     });
   }
 
-  // @UseGuards(OrganizationAuthGuard)
-  // @UsePipes(ExcludeUndefinedPipe)
-  // @Patch()
-  // async updateOne(
-  //   @Body() updateApplicationRecordDto: UpdateApplicationRecordDto,
-  //   @User() user,
-  // ) {
-  //   await this.applicationRecordsService.updateOne({
-  //     lastModifier: user.id,
-  //     ...updateApplicationRecordDto,
-  //   });
-  // }
+  @UseGuards(OrganizationAuthGuard)
+  @UsePipes(ExcludeUndefinedPipe)
+  @Patch()
+  async updateOne(@Body() updateApplicationRecordDto: UpdateApplicationRecordDto, @User() user) {
+    await this.applicationRecordsService.updateOne({
+      lastModifier: user.id,
+      ...updateApplicationRecordDto,
+    });
+  }
 
   // @UseGuards(OrganizationAuthGuard)
   // @UsePipes(ExcludeUndefinedPipe)
