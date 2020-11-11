@@ -6,11 +6,7 @@ import { DepartmentsController } from './departments.controller';
 import { DepartmentsService } from './departments.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      { name: 'Department', schema: DepartmentSchema },
-    ]),
-  ],
+  imports: [MongooseModule.forFeature([{ name: 'Department', schema: DepartmentSchema }])],
   controllers: [DepartmentsController],
   providers: [DepartmentsService],
 })

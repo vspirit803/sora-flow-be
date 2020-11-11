@@ -10,9 +10,7 @@ describe('ApplicationRecordCollectionTasksService', () => {
       providers: [ApplicationRecordCollectionTasksService],
     }).compile();
 
-    service = module.get<ApplicationRecordCollectionTasksService>(
-      ApplicationRecordCollectionTasksService,
-    );
+    service = module.get<ApplicationRecordCollectionTasksService>(ApplicationRecordCollectionTasksService);
   });
 
   it('should be defined', () => {

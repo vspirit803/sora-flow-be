@@ -20,12 +20,7 @@ import { ValidateIdPipe } from 'src/Pipes/validateId.pipe';
 
 import { ApplicationStatus } from './application.schema';
 import { ApplicationsService } from './applications.service';
-import {
-  CreateApplicationDto,
-  DeleteApplicationDto,
-  QueryApplicationDto,
-  UpdateApplicationDto,
-} from './dto';
+import { CreateApplicationDto, DeleteApplicationDto, QueryApplicationDto, UpdateApplicationDto } from './dto';
 
 @UsePipes(
   new ValidationPipe({
@@ -63,7 +58,7 @@ export class ApplicationsController {
     createApplicationDto: CreateApplicationDto,
     @User() user,
   ) {
-    const createdApplication = await this.applicationsService.create({
+    await this.applicationsService.create({
       name: '未命名应用',
       organization: user.organizationId as string,
       creator: user.id as string,
@@ -76,10 +71,7 @@ export class ApplicationsController {
   @UseGuards(OrganizationAuthGuard)
   @UsePipes(ExcludeUndefinedPipe)
   @Patch()
-  async updateOne(
-    @Body() updateApplicationDto: UpdateApplicationDto,
-    @User() user,
-  ) {
+  async updateOne(@Body() updateApplicationDto: UpdateApplicationDto, @User() user) {
     await this.applicationsService.updateOne({
       lastModifier: user.id,
       ...updateApplicationDto,
@@ -89,10 +81,7 @@ export class ApplicationsController {
   @UseGuards(OrganizationAuthGuard)
   @UsePipes(ExcludeUndefinedPipe)
   @Delete()
-  async deleteOne(
-    @Body() deleteApplicationDto: DeleteApplicationDto,
-    @User() user,
-  ) {
+  async deleteOne(@Body() deleteApplicationDto: DeleteApplicationDto, @User() user) {
     await this.applicationsService.deleteOne({
       organization: user.organizationId as string,
       ...deleteApplicationDto,

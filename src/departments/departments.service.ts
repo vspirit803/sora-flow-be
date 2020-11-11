@@ -3,12 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Department } from './department.schema';
-import {
-  CreateDepartmentDto,
-  DeleteDepartmentDto,
-  QueryDepartmentDto,
-  UpdateDepartmentDto,
-} from './dto';
+import { CreateDepartmentDto, DeleteDepartmentDto, QueryDepartmentDto, UpdateDepartmentDto } from './dto';
 import { DepartmentVo } from './vo/department.vo';
 
 export function transformToTree(list: Array<Department>): Array<DepartmentVo> {
@@ -23,16 +18,12 @@ export function transformToTree(list: Array<Department>): Array<DepartmentVo> {
     }
   }
 
-  return Object.values(itemMap).filter(
-    (each) => !each.parentId || !itemMap[each.parentId],
-  );
+  return Object.values(itemMap).filter((each) => !each.parentId || !itemMap[each.parentId]);
 }
 
 @Injectable()
 export class DepartmentsService {
-  constructor(
-    @InjectModel('Department') private departmentModel: Model<Department>,
-  ) {}
+  constructor(@InjectModel('Department') private departmentModel: Model<Department>) {}
 
   async findDepartments(query: QueryDepartmentDto) {
     const departments = await this.departmentModel.find(query);
@@ -45,11 +36,7 @@ export class DepartmentsService {
   }
 
   async findOne(id: string): Promise<Department | undefined> {
-    return this.departmentModel
-      .findOne({ id })
-      .populate('supervisorInfo')
-      .populate('membersInfo')
-      .exec();
+    return this.departmentModel.findOne({ id }).populate('supervisorInfo').populate('membersInfo').exec();
   }
 
   async create(createDepartmentDto: CreateDepartmentDto) {
@@ -89,24 +76,15 @@ export class DepartmentsService {
   }
 
   async findMembers(id: string) {
-    const department = await this.departmentModel
-      .findOne({ id })
-      .populate('membersInfo')
-      .exec();
+    const department = await this.departmentModel.findOne({ id }).populate('membersInfo').exec();
     return department.members;
   }
 
   async addMembers(id: string, members: Array<string>) {
-    await this.departmentModel.updateOne(
-      { id },
-      { $addToSet: { members: { $each: members } } },
-    );
+    await this.departmentModel.updateOne({ id }, { $addToSet: { members: { $each: members } } });
   }
 
   async removeMember(id: string, member: string) {
-    await this.departmentModel.updateOne(
-      { id },
-      { $pull: { members: member } },
-    );
+    await this.departmentModel.updateOne({ id }, { $pull: { members: member } });
   }
 }

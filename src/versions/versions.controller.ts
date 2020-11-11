@@ -16,12 +16,7 @@ import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
 
-import {
-  CreateVersionDto,
-  DeleteVersionDto,
-  QueryVersionDto,
-  UpdateVersionDto,
-} from './dto';
+import { CreateVersionDto, DeleteVersionDto, QueryVersionDto, UpdateVersionDto } from './dto';
 import { VersionsService } from './versions.service';
 
 @UsePipes(

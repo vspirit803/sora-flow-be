@@ -1,21 +1,10 @@
-import {
-  forwardRef,
-  HttpException,
-  HttpStatus,
-  Inject,
-  Injectable,
-} from '@nestjs/common';
+import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { OrganizationsService } from 'src/organizations/organizations.service';
 
 import { Account } from './account.schema';
-import {
-  CreateAccountDto,
-  DeleteAccountDto,
-  QueryAccountDto,
-  UpdateAccountDto,
-} from './dto';
+import { CreateAccountDto, DeleteAccountDto, QueryAccountDto, UpdateAccountDto } from './dto';
 
 @Injectable()
 export class AccountsService {
@@ -26,12 +15,7 @@ export class AccountsService {
   ) {}
 
   async create(createAccountDto: CreateAccountDto): Promise<Account> {
-    const {
-      organizationId,
-      roles = [],
-      organizations,
-      ...others
-    } = createAccountDto;
+    const { organizationId, roles = [], organizations, ...others } = createAccountDto;
     const createdAccount = new this.accountModel(others);
     if (organizations) {
       createdAccount.organizations = organizations;
@@ -70,15 +54,8 @@ export class AccountsService {
    * @param organizationId 组织id
    * @param roles 角色id列表
    */
-  async joinOrganization(
-    id: string,
-    organizationId: string,
-    roles: Array<string>,
-  ) {
-    await this.accountModel.updateOne(
-      { id },
-      { $addToSet: { organizations: { id: organizationId, roles } } },
-    );
+  async joinOrganization(id: string, organizationId: string, roles: Array<string>) {
+    await this.accountModel.updateOne({ id }, { $addToSet: { organizations: { id: organizationId, roles } } });
     await this.organizationsService.addMember(organizationId);
   }
 
@@ -88,10 +65,7 @@ export class AccountsService {
    * @param organizationId 组织id
    */
   async leaveOrganization(id: string, organizationId: string) {
-    await this.accountModel.updateOne(
-      { id },
-      { $pull: { organizations: { id: organizationId } } },
-    );
+    await this.accountModel.updateOne({ id }, { $pull: { organizations: { id: organizationId } } });
     await this.organizationsService.removeMember(organizationId);
   }
 
@@ -128,9 +102,7 @@ export class AccountsService {
     });
     if (superviseOrganizations.length) {
       throw new HttpException(
-        `[${account.name}] - [${
-          account.nickname
-        }]还有管理的的组织${superviseOrganizations
+        `[${account.name}] - [${account.nickname}]还有管理的的组织${superviseOrganizations
           .map((each) => `[${each.name}]`)
           .join('/')},无法删除该账号`,
         HttpStatus.BAD_REQUEST,
@@ -141,15 +113,9 @@ export class AccountsService {
     await this.accountModel.deleteOne({ id });
   }
 
-  async findAll(
-    query: QueryAccountDto,
-    organizationId?: string,
-  ): Promise<Account[]> {
+  async findAll(query: QueryAccountDto, organizationId?: string): Promise<Account[]> {
     if (!organizationId) {
-      return this.accountModel
-        .find(query)
-        .select({ organizations: false })
-        .exec();
+      return this.accountModel.find(query).select({ organizations: false }).exec();
       // return this.accountModel.find(query).populate('organizationList').exec();
     }
     return this.accountModel
@@ -189,10 +155,7 @@ export class AccountsService {
       .exec();
   }
 
-  async findOneByNamePassword(
-    name: string,
-    password: string,
-  ): Promise<Account | undefined> {
+  async findOneByNamePassword(name: string, password: string): Promise<Account | undefined> {
     return this.accountModel.findOne({ name, password }).exec();
   }
 
@@ -206,9 +169,6 @@ export class AccountsService {
   }
 
   async deleteOrganization(id: string) {
-    await this.accountModel.updateMany(
-      {},
-      { $pull: { organizations: { id } } },
-    );
+    await this.accountModel.updateMany({}, { $pull: { organizations: { id } } });
   }
 }

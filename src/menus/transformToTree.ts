@@ -20,7 +20,5 @@ export function transformToTree(list: Array<Menu>): Array<MenuTreeItem> {
     }
   }
 
-  return Object.values(itemMap).filter(
-    (each) => !each.parentId || !itemMap[each.parentId],
-  );
+  return Object.values(itemMap).filter((each) => !each.parentId || !itemMap[each.parentId]);
 }

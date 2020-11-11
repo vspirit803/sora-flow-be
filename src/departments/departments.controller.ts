@@ -13,21 +13,13 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
-import {
-  UseOperateLog,
-  UseOperateLogMethod,
-} from 'src/Decorators/operate-log.decorator';
+import { UseOperateLog, UseOperateLogMethod } from 'src/Decorators/operate-log.decorator';
 import { User } from 'src/Decorators/user.decorator';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
 import { ValidateIdPipe } from 'src/Pipes/validateId.pipe';
 
 import { DepartmentsService } from './departments.service';
-import {
-  CreateDepartmentDto,
-  DeleteDepartmentDto,
-  QueryDepartmentDto,
-  UpdateDepartmentDto,
-} from './dto';
+import { CreateDepartmentDto, DeleteDepartmentDto, QueryDepartmentDto, UpdateDepartmentDto } from './dto';
 
 @UsePipes(
   new ValidationPipe({
@@ -97,10 +89,7 @@ export class DepartmentsController {
   @UseGuards(OrganizationAuthGuard)
   @Post(':id/members')
   @UsePipes(ValidateIdPipe)
-  async addMember(
-    @Param('id') id: string,
-    @Body() { members }: { members: Array<string> },
-  ) {
+  async addMember(@Param('id') id: string, @Body() { members }: { members: Array<string> }) {
     return this.departmentsService.addMembers(id, members);
   }
 

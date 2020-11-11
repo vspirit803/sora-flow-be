@@ -9,12 +9,7 @@ export class UpdateApplicationRecordDto {
   @IsOptional()
   @IsMongoId()
   @Expose()
-  readonly account?: string;
-
-  @IsOptional()
-  @IsMongoId()
-  @Expose()
-  readonly organization?: string;
+  readonly lastModifier?: string;
 
   @IsOptional()
   @Expose()

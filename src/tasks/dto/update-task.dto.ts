@@ -9,4 +9,8 @@ export class UpdateTaskDto {
   @IsOptional()
   @Expose()
   readonly status?: string;
+
+  @IsOptional()
+  @Expose()
+  readonly metadata?: Record<string, unknown>;
 }

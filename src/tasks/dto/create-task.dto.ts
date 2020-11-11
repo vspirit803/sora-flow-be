@@ -1,6 +1,5 @@
 import { Expose } from 'class-transformer';
 import { IsMongoId, IsOptional, IsString } from 'class-validator';
-import { Types } from 'mongoose';
 
 export class CreateTaskDto {
   @IsOptional()
@@ -13,11 +12,14 @@ export class CreateTaskDto {
   @Expose()
   readonly account?: string;
 
+  @IsString()
   @Expose()
   readonly type: string;
 
+  @IsOptional()
+  @IsString()
   @Expose()
-  readonly status: string;
+  readonly status?: string;
 
   @Expose()
   /**截止时间 */

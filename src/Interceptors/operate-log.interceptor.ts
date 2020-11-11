@@ -1,9 +1,4 @@
-import {
-  CallHandler,
-  ExecutionContext,
-  Injectable,
-  NestInterceptor,
-} from '@nestjs/common';
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import { Observable, throwError } from 'rxjs';
@@ -14,10 +9,7 @@ import { OperateLogsService } from 'src/operate-logs/operate-logs.service';
 
 @Injectable()
 export class OperateLogInterceptor implements NestInterceptor {
-  constructor(
-    private readonly operateLogsService: OperateLogsService,
-    private readonly reflector: Reflector,
-  ) {}
+  constructor(private readonly operateLogsService: OperateLogsService, private readonly reflector: Reflector) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest() as Request;
@@ -54,8 +46,7 @@ export class OperateLogInterceptor implements NestInterceptor {
       operateTarget,
       operateType,
       user: user as Account,
-      organizationId: (user as Account & { organizationId: string })
-        .organizationId,
+      organizationId: (user as Account & { organizationId: string }).organizationId,
     };
     return next.handle().pipe(
       tap(() => {

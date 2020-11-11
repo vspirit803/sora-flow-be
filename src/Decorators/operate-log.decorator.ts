@@ -6,10 +6,7 @@ import { OperateLogInterceptor } from 'src/Interceptors/operate-log.interceptor'
  * @param operateName 操作名称
  */
 export function UseOperateLog(operateName: string) {
-  return applyDecorators(
-    SetMetadata('operateTarget', operateName),
-    UseInterceptors(OperateLogInterceptor),
-  );
+  return applyDecorators(SetMetadata('operateTarget', operateName), UseInterceptors(OperateLogInterceptor));
 }
 
 export function UseOperateLogMethod(operateName: string) {

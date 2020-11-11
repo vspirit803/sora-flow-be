@@ -3,22 +3,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { RolesService } from 'src/roles/roles.service';
 
-import {
-  CreateMenuDto,
-  DeleteMenuDto,
-  QueryMenuDto,
-  UpdateMenuDto,
-  UpdateMenuOrderDto,
-} from './dto';
+import { CreateMenuDto, DeleteMenuDto, QueryMenuDto, UpdateMenuDto, UpdateMenuOrderDto } from './dto';
 import { Menu } from './menu.schema';
 import { MenuTreeItem, transformToTree } from './transformToTree';
 
 @Injectable()
 export class MenusService {
-  constructor(
-    @InjectModel('Menu') private menuModel: Model<Menu>,
-    private readonly rolesService: RolesService,
-  ) {}
+  constructor(@InjectModel('Menu') private menuModel: Model<Menu>, private readonly rolesService: RolesService) {}
 
   async findMenuTree(query: QueryMenuDto): Promise<MenuTreeItem[]> {
     return transformToTree(await this.findMenus(query));
@@ -47,10 +38,7 @@ export class MenusService {
         throw new HttpException('不存在的parentId', HttpStatus.BAD_REQUEST);
       }
       if (parent.type === 'item') {
-        throw new HttpException(
-          '不能给菜单项添加子菜单',
-          HttpStatus.BAD_REQUEST,
-        );
+        throw new HttpException('不能给菜单项添加子菜单', HttpStatus.BAD_REQUEST);
       }
       const { idPath, namePath, id, name } = parent;
 
@@ -77,19 +65,14 @@ export class MenusService {
     const { id, enable, ...others } = updateMenuDto;
     await this.menuModel.updateOne({ id }, others);
     if (enable !== undefined) {
-      await this.menuModel.updateMany(
-        { $or: [{ id }, { idPath: id }] },
-        { enable },
-      );
+      await this.menuModel.updateMany({ $or: [{ id }, { idPath: id }] }, { enable });
     }
   }
 
   async updateMenuOrder(updateMenuOrderDto: UpdateMenuOrderDto) {
     const { menus } = updateMenuOrderDto;
     await Promise.all(
-      (
-        await this.menuModel.find({ id: { $in: menus } }).select('+_id')
-      ).map((eachMenu) =>
+      (await this.menuModel.find({ id: { $in: menus } }).select('+_id')).map((eachMenu) =>
         eachMenu.set({ order: menus.indexOf(eachMenu.id) }).save(),
       ),
     );

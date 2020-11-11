@@ -17,12 +17,7 @@ import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
 import { User } from 'src/Decorators/user.decorator';
 
 import { ExcludeUndefinedPipe } from '../Pipes/excludeUndefined.pipe';
-import {
-  CreateRoleDto,
-  DeleteRoleDto,
-  QueryRoleDto,
-  UpdateRoleDto,
-} from './dto';
+import { CreateRoleDto, DeleteRoleDto, QueryRoleDto, UpdateRoleDto } from './dto';
 import { Role } from './role.schema';
 import { RolesService } from './roles.service';
 

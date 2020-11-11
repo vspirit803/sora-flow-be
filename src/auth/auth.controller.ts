@@ -33,14 +33,8 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post('organization')
   /**获取指定公司的token */
-  async organizationLogin(
-    @Body() loginOrganizationDto: LoginOrganizationDto,
-    @Req() req,
-  ) {
-    const auth = await this.authService.loginOrganization(
-      req.user,
-      loginOrganizationDto.organizationId,
-    );
+  async organizationLogin(@Body() loginOrganizationDto: LoginOrganizationDto, @Req() req) {
+    const auth = await this.authService.loginOrganization(req.user, loginOrganizationDto.organizationId);
     if (!auth) {
       throw new UnauthorizedException();
     }

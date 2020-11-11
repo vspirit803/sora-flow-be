@@ -42,6 +42,7 @@ export class TasksController {
     await this.tasksService.create({
       account: user.id,
       organization: user.organizationId,
+      status: 'processing',
       ...createTaskDto,
     });
   }

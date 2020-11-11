@@ -28,8 +28,13 @@ export class TasksService {
   }
 
   async updateOne(updateTaskDto: UpdateTaskDto) {
-    const { id } = updateTaskDto;
-    await this.taskModel.updateOne({ id }, updateTaskDto);
+    const { id, metadata = {}, ...others } = updateTaskDto;
+    await this.taskModel.updateOne({ id }, others);
+    await Promise.all(
+      Object.entries(metadata).map(([key, value]) =>
+        this.taskModel.updateOne({ id }, { $set: { [`metadata.${key}`]: value } }),
+      ),
+    );
   }
 
   async deleteOne(deleteTaskDto: DeleteTaskDto) {

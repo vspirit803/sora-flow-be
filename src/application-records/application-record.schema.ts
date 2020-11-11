@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { SchemaType } from 'mongoose';
+import { SchemaType, Types } from 'mongoose';
 import { BaseSchema } from 'src/Common/BaseSchema';
 
 @Schema({
@@ -24,12 +24,10 @@ export class ApplicationRecord extends BaseSchema {
 
   @Prop({ default: {} })
   /**填的数据 */
-  data: SchemaType;
+  data: Types.Map<any>;
 }
 
-export const ApplicationRecordSchema = SchemaFactory.createForClass(
-  ApplicationRecord,
-);
+export const ApplicationRecordSchema = SchemaFactory.createForClass(ApplicationRecord);
 ApplicationRecordSchema.set('timestamps', true);
 
 ApplicationRecordSchema.virtual('populatedApplication', {

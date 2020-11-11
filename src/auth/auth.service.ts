@@ -5,10 +5,7 @@ import { Organization } from 'src/organizations/organization.schema';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private readonly accountsService: AccountsService,
-    private readonly jwtService: JwtService,
-  ) {}
+  constructor(private readonly accountsService: AccountsService, private readonly jwtService: JwtService) {}
 
   async validateAccount(name: string, password: string): Promise<any> {
     // 管理员账号特殊处理
@@ -16,10 +13,7 @@ export class AuthService {
       return { name: 'admin', nickname: '金闪闪管理员' };
     }
 
-    const user = await this.accountsService.findOneByNamePassword(
-      name,
-      password,
-    );
+    const user = await this.accountsService.findOneByNamePassword(name, password);
     if (user) {
       return user;
     }
@@ -55,9 +49,7 @@ export class AuthService {
     if (!organization) {
       return null;
     }
-    const organizationRoleId = organization.roles.find(
-      (eachRole) => eachRole.type === 'version',
-    )?.id;
+    const organizationRoleId = organization.roles.find((eachRole) => eachRole.type === 'version')?.id;
     const payload = {
       name: account.name,
       nickname: account.nickname,

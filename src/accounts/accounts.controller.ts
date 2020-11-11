@@ -11,20 +11,13 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
-import { User } from 'src/Decorators/user.decorator';
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ExcludeUndefinedPipe } from '../Pipes/excludeUndefined.pipe';
 import { Account } from './account.schema';
 import { AccountsService } from './accounts.service';
-import {
-  CreateAccountDto,
-  DeleteAccountDto,
-  QueryAccountDto,
-  UpdateAccountDto,
-} from './dto';
+import { CreateAccountDto, DeleteAccountDto, QueryAccountDto, UpdateAccountDto } from './dto';
 
 @UsePipes(
   new ValidationPipe({
