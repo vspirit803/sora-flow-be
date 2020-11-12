@@ -1,12 +1,14 @@
-import { Body, Controller, Get, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { OrganizationAuthGuard } from 'src/auth/organization-auth.guard';
 import { UseOperateLog } from 'src/Decorators/operate-log.decorator';
 import { User } from 'src/Decorators/user.decorator';
 import { ExcludeUndefinedPipe } from 'src/Pipes/excludeUndefined.pipe';
+import { ValidateIdPipe } from 'src/Pipes/validateId.pipe';
 
 import { ApplicationRecordCollectionTasksService } from './application-record-collection-tasks.service';
 import { CreateApplicationRecordCollectionTaskDto, QueryApplicationRecordCollectionTaskDto } from './dto';
+import { ApplicationRecordCollectionTaskInfo } from './vo/application-record-collection-task-info';
 
 @UsePipes(
   new ValidationPipe({
@@ -20,9 +22,9 @@ import { CreateApplicationRecordCollectionTaskDto, QueryApplicationRecordCollect
 export class ApplicationRecordCollectionTasksController {
   constructor(private readonly applicationRecordCollectionTasksService: ApplicationRecordCollectionTasksService) {}
 
-  @Get()
   @UseGuards(OrganizationAuthGuard)
   @UsePipes(ExcludeUndefinedPipe)
+  @Get()
   async findAll(@Query() query: QueryApplicationRecordCollectionTaskDto, @User() user) {
     return this.applicationRecordCollectionTasksService.find({
       publisher: user.id,
@@ -45,5 +47,12 @@ export class ApplicationRecordCollectionTasksController {
       status: 'processing',
       ...createApplicationRecordCollectionTaskDto,
     });
+  }
+
+  @UseGuards(OrganizationAuthGuard)
+  @UsePipes(ValidateIdPipe)
+  @Get(':id')
+  async findOne(@Param('id') id: string, @User() user): Promise<ApplicationRecordCollectionTaskInfo> {
+    return this.applicationRecordCollectionTasksService.findOneByUserId(id, user.id);
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { TasksService } from 'src/tasks/tasks.service';
@@ -55,6 +55,28 @@ export class ApplicationRecordCollectionTasksService {
       .sort({ [key]: order === 'DESC' ? -1 : 1 })
       .skip((page - 1) * size)
       .limit(size);
+  }
+
+  async findOneByUserId(applicationRecordCollectionTaskId: string, userId: string) {
+    const applicationRecordCollectionTask = await this.applicationRecordCollectionTaskModel
+      .findOne({ id: applicationRecordCollectionTaskId })
+      .populate({
+        path: 'populatedTasks',
+        match: { account: userId },
+        select: { id: true, status: true, metadata: true },
+      })
+      .populate('populatedPublisher', { id: true, name: true, nickname: true })
+      .exec();
+    if (!applicationRecordCollectionTask) {
+      throw new HttpException('不存在的任务', HttpStatus.BAD_REQUEST);
+    }
+    const { tasks, ...others } = applicationRecordCollectionTask.toJSON();
+    if (tasks.length === 0) {
+      throw new HttpException('您没有该应用的填报任务', HttpStatus.BAD_REQUEST);
+    }
+
+    const [task] = tasks;
+    return { ...others, task };
   }
 
   async updateOne(updateTaskDto: UpdateApplicationRecordCollectionTaskDto) {

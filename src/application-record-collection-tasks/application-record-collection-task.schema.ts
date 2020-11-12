@@ -72,7 +72,7 @@ ApplicationRecordCollectionTaskSchema.virtual('populatedPublisher', {
 });
 
 ApplicationRecordCollectionTaskSchema.virtual('populatedTasks', {
-  ref: 'Tasks',
+  ref: 'Task',
   localField: 'tasks',
   foreignField: 'id',
 });
