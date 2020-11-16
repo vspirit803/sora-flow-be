@@ -19,7 +19,7 @@ describe('AuthService', () => {
         PassportModule,
         JwtModule.register({
           secret: jwtConstants.secret,
-          signOptions: { expiresIn: '86400s' },
+          signOptions: { expiresIn: '7d' },
         }),
         ConfigModule.forRoot(),
         MongooseModule.forRootAsync({
