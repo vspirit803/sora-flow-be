@@ -1,6 +1,8 @@
 import { Expose } from 'class-transformer';
 import { IsArray, IsMongoId, IsOptional, IsString } from 'class-validator';
 
+import { ApplicationStatus } from '../application.schema';
+
 export class UpdateApplicationDto {
   @IsMongoId()
   @Expose()
@@ -15,6 +17,11 @@ export class UpdateApplicationDto {
   @IsMongoId()
   @Expose()
   readonly lastModifier?: string;
+
+  @IsOptional()
+  @IsString({ groups: ['Designing', 'Published', 'Archive'] })
+  @Expose()
+  readonly status?: ApplicationStatus;
 
   @IsOptional()
   @IsArray()

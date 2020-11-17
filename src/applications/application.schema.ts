@@ -1,11 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { BaseSchema } from 'src/Common/BaseSchema';
 
-export enum ApplicationStatus {
-  Designing = 'Designing',
-  Published = 'Published',
-  Archive = 'Archive',
-}
+export type ApplicationStatus = 'Designing' | 'Published' | 'Archive';
 
 @Schema({
   toJSON: { getters: true, virtuals: false },
@@ -35,7 +31,7 @@ export class Application extends BaseSchema {
   /**最后修改者 */
   lastModifier?: string;
 
-  @Prop()
+  @Prop({ default: 'Designing' })
   /**状态 */
   status: ApplicationStatus;
 

@@ -62,7 +62,7 @@ export class ApplicationsController {
       name: '未命名应用',
       organization: user.organizationId as string,
       creator: user.id as string,
-      status: ApplicationStatus.Designing,
+      status: 'Designing',
       formModel: [],
       ...createApplicationDto,
     });
