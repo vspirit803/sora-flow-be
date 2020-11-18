@@ -1,3 +1,21 @@
+## [0.0.5](https://github.com/vspirit803/sora-flow-be/compare/v0.0.4...v0.0.5) (2020-11-18)
+
+
+### Features
+
+* **application:** allow modifying status of applications ([55f84c1](https://github.com/vspirit803/sora-flow-be/commit/55f84c12f08e378b036ec66e48f423af05542af0))
+* **application-record-collection-tasks:** add title field ([43f489b](https://github.com/vspirit803/sora-flow-be/commit/43f489bac2ebec810ebb4294de150e10996e4c63))
+* **application-record-collection-tasks:** allow to obtain detailed information of application record collection tasks by id ([d74487f](https://github.com/vspirit803/sora-flow-be/commit/d74487fddee8280c31cfd0016c0cbe79ccc663b0))
+* **application-records:** automatically update the status of related tasks when creating application records ([ff55f71](https://github.com/vspirit803/sora-flow-be/commit/ff55f71a1b8fadec1c08cf8278dafb2df0d87aa6))
+* **departments:** populate members of departments ([e30b38d](https://github.com/vspirit803/sora-flow-be/commit/e30b38ded7b08c3174e74798e3a02e0a80cbd38b))
+* add application-record-collection-tasks module ([1c62745](https://github.com/vspirit803/sora-flow-be/commit/1c62745b4b57babf32dcdb2437ca3df3a35b4568))
+* add application-record-collection-tasks module ([418a142](https://github.com/vspirit803/sora-flow-be/commit/418a142c0a4898477f9259fcc044a09fe7a5ce60))
+* add tasks module ([7bf8932](https://github.com/vspirit803/sora-flow-be/commit/7bf8932b9b0a3c7c14ff5de49e350eddc8b7a2af))
+* modify the validity period of the authorization to 7 days ([8942cf3](https://github.com/vspirit803/sora-flow-be/commit/8942cf32d16de5841a4c11836ecd3a4ce741f506))
+* **application-record-collection-tasks:** allow update of existing application records ([eb66812](https://github.com/vspirit803/sora-flow-be/commit/eb6681251f3afe56c77cc67701b9678faa84d429))
+
+
+
 ## 0.0.4 (2020-10-16)
 
 
