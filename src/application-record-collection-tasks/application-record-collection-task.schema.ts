@@ -30,6 +30,10 @@ export class ApplicationRecordCollectionTask extends BaseSchema {
   application: string;
 
   @Prop()
+  /**标题 */
+  title: string;
+
+  @Prop()
   /**状态 */
   status: string;
 

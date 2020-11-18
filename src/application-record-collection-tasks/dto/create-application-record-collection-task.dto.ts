@@ -19,16 +19,19 @@ export class CreateApplicationRecordCollectionTaskDto {
   @IsOptional()
   @IsString()
   @Expose()
-  readonly status: string;
+  readonly status?: string;
+
+  @IsString()
+  @Expose()
+  readonly title?: string;
 
   @IsDateString()
   @Expose()
   readonly finalTime: Date;
 
-  @IsOptional()
   @IsArray()
   @IsMongoId({ each: true })
   @Expose()
   /**填表人 */
-  readonly reporters?: Array<string>;
+  readonly reporters: Array<string>;
 }

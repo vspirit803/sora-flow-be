@@ -20,7 +20,7 @@ export class ApplicationRecordCollectionTasksService {
   ) {}
 
   async create(createTaskDto: CreateApplicationRecordCollectionTaskDto) {
-    const { application, organization, finalTime, reporters = [] } = createTaskDto;
+    const { application, organization, finalTime, title, reporters = [] } = createTaskDto;
     const createdTask = new this.applicationRecordCollectionTaskModel(createTaskDto);
 
     //为每一个reporter生成一个任务
@@ -30,11 +30,12 @@ export class ApplicationRecordCollectionTasksService {
           organization,
           account: eachReporter,
           finalTime,
-          type: 'ApplicationRecordCollection',
+          type: 'ApplicationRecordReport',
           status: 'processing',
           metadata: {
             application,
             applicationRecordCollectionTask: createdTask.id,
+            title,
           },
         }),
       ),
