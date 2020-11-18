@@ -26,7 +26,7 @@ export class DepartmentsService {
   constructor(@InjectModel('Department') private departmentModel: Model<Department>) {}
 
   async findDepartments(query: QueryDepartmentDto) {
-    const departments = await this.departmentModel.find(query);
+    const departments = await this.departmentModel.find(query).populate('membersInfo');
     //转为树形结构
     return transformToTree(departments);
   }
