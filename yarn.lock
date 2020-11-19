@@ -628,10 +628,10 @@
     lodash "4.17.20"
     path-to-regexp "3.2.0"
 
-"@nestjs/testing@^7.5.3":
-  version "7.5.3"
-  resolved "https://registry.npm.taobao.org/@nestjs/testing/download/@nestjs/testing-7.5.3.tgz#0d3aa8b2e2f8de71e74194b6185670ed6e0c1aa8"
-  integrity sha1-DTqosuL43nHnQZS2GFZw7W4MGqg=
+"@nestjs/testing@^7.5.4":
+  version "7.5.4"
+  resolved "https://registry.npm.taobao.org/@nestjs/testing/download/@nestjs/testing-7.5.4.tgz#e95844ef9cbde8f2db0be2fd8ae79da3015405a4"
+  integrity sha1-6VhE75y96PLbC+L9iuedowFUBaQ=
   dependencies:
     optional "0.1.4"
     tslib "2.0.3"
