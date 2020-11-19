@@ -17,8 +17,8 @@ export class VersionsService {
   async create(createVersionDto: CreateVersionDto, organizationId: string): Promise<Version> {
     const { authorizedOperations } = createVersionDto;
     const createRoleDto: CreateRoleDto = {
-      name: 'admin',
-      text: '管理员',
+      name: 'OrganizationManager',
+      text: '组织管理员',
       authorizedOperations,
       organizationId,
       type: 'version',
