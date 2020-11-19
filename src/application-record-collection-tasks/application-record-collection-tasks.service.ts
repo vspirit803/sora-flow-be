@@ -53,6 +53,7 @@ export class ApplicationRecordCollectionTasksService {
     } = query;
     return this.applicationRecordCollectionTaskModel
       .find(others)
+      .populate('populatedTasks', { status: true })
       .sort({ [key]: order === 'DESC' ? -1 : 1 })
       .skip((page - 1) * size)
       .limit(size);
