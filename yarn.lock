@@ -861,10 +861,10 @@
     "@types/bson" "*"
     "@types/node" "*"
 
-"@types/mongoose@^5.7.37":
-  version "5.7.37"
-  resolved "https://registry.npm.taobao.org/@types/mongoose/download/@types/mongoose-5.7.37.tgz#8aa6960a52e551ee49edbb6b0dce587bbb66762b"
-  integrity sha1-iqaWClLlUe5J7btrDc5Ye7tmdis=
+"@types/mongoose@^5.10.1":
+  version "5.10.1"
+  resolved "https://registry.npm.taobao.org/@types/mongoose/download/@types/mongoose-5.10.1.tgz#41d5fe0fef5dce33c140467f1cb2a53b689a66e6"
+  integrity sha1-QdX+D+9dzjPBQEZ/HLKlO2iaZuY=
   dependencies:
     "@types/mongodb" "*"
     "@types/node" "*"
