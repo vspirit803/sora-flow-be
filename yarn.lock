@@ -6640,10 +6640,10 @@ swagger-ui-dist@^3.18.1:
   resolved "https://registry.npm.taobao.org/swagger-ui-dist/download/swagger-ui-dist-3.26.2.tgz#22c700906c8911b1c9956da6c3fca371dba6219f"
   integrity sha1-IscAkGyJEbHJlW2mw/yjcdumIZ8=
 
-swagger-ui-express@^4.1.4:
-  version "4.1.4"
-  resolved "https://registry.npm.taobao.org/swagger-ui-express/download/swagger-ui-express-4.1.4.tgz#8b814ad998b850a1cf90e71808d6d0a8a8daf742"
-  integrity sha1-i4FK2Zi4UKHPkOcYCNbQqKja90I=
+swagger-ui-express@^4.1.5:
+  version "4.1.5"
+  resolved "https://registry.npm.taobao.org/swagger-ui-express/download/swagger-ui-express-4.1.5.tgz#114f3ce017ca6d6069d960ea8ffef677784b6f2f"
+  integrity sha1-EU884BfKbWBp2WDqj/72d3hLby8=
   dependencies:
     swagger-ui-dist "^3.18.1"
 
