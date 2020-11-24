@@ -540,10 +540,10 @@
     webpack "5.4.0"
     webpack-node-externals "2.5.2"
 
-"@nestjs/common@^7.5.4":
-  version "7.5.4"
-  resolved "https://registry.npm.taobao.org/@nestjs/common/download/@nestjs/common-7.5.4.tgz#06093206bfa71ada1c54fc4cffea922cef6c5dbd"
-  integrity sha1-BgkyBr+nGtocVPxM/+qSLO9sXb0=
+"@nestjs/common@^7.5.5":
+  version "7.5.5"
+  resolved "https://registry.npm.taobao.org/@nestjs/common/download/@nestjs/common-7.5.5.tgz#9c8bfcbe32ef7768d87cb458084271f7e38cc32e"
+  integrity sha1-nIv8vjLvd2jYfLRYCEJx9+OMwy4=
   dependencies:
     axios "0.21.0"
     iterare "1.2.1"
