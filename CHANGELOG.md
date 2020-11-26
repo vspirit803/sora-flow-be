@@ -1,3 +1,19 @@
+## [0.0.6](https://github.com/vspirit803/sora-flow-be/compare/v0.0.5...v0.0.6) (2020-11-26)
+
+
+### Features
+
+* **application-record-collection-tasks:** populate tasks field when fetching the task list ([b65964c](https://github.com/vspirit803/sora-flow-be/commit/b65964cc17904e36a5bb714fe95fef79aa8605d5))
+* **auth:** return a clearer message when authorization expires ([86ac95e](https://github.com/vspirit803/sora-flow-be/commit/86ac95e452ca1a435814f322b0435de18bd790c9))
+* **versions:** modify name and text of version role ([95072d8](https://github.com/vspirit803/sora-flow-be/commit/95072d8a20458251c543b22f7017343448d94e3e))
+
+
+### Reverts
+
+* Revert "build(deps-dev): bump @types/express from 4.17.8 to 4.17.9" ([842127d](https://github.com/vspirit803/sora-flow-be/commit/842127d2e23066a0b660254b5430ec32718bae04))
+
+
+
 ## [0.0.5](https://github.com/vspirit803/sora-flow-be/compare/v0.0.4...v0.0.5) (2020-11-18)
 
 
