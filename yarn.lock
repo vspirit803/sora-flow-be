@@ -593,10 +593,10 @@
   resolved "https://registry.npm.taobao.org/@nestjs/mongoose/download/@nestjs/mongoose-7.1.0.tgz#abcda46ac54ea5529e09bad1755ff4d052dc63a4"
   integrity sha1-q82kasVOpVKeCbrRdV/00FLcY6Q=
 
-"@nestjs/passport@^7.1.4":
-  version "7.1.4"
-  resolved "https://registry.npm.taobao.org/@nestjs/passport/download/@nestjs/passport-7.1.4.tgz#5ecffd34feed940c28c8e07208a34c26b291b28f"
-  integrity sha1-Xs/9NP7tlAwoyOByCKNMJrKRso8=
+"@nestjs/passport@^7.1.5":
+  version "7.1.5"
+  resolved "https://registry.npm.taobao.org/@nestjs/passport/download/@nestjs/passport-7.1.5.tgz#b32fc0492008d73ebae4327fbc0012a738a83664"
+  integrity sha1-sy/ASSAI1z665DJ/vAASpzioNmQ=
 
 "@nestjs/platform-express@^7.5.5":
   version "7.5.5"
