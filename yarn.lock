@@ -862,10 +862,10 @@
     "@types/bson" "*"
     "@types/node" "*"
 
-"@types/mongoose@^5.10.1":
-  version "5.10.1"
-  resolved "https://registry.npm.taobao.org/@types/mongoose/download/@types/mongoose-5.10.1.tgz#41d5fe0fef5dce33c140467f1cb2a53b689a66e6"
-  integrity sha1-QdX+D+9dzjPBQEZ/HLKlO2iaZuY=
+"@types/mongoose@^5.10.2":
+  version "5.10.2"
+  resolved "https://registry.npm.taobao.org/@types/mongoose/download/@types/mongoose-5.10.2.tgz#761d73b78caaa2c4c745ab4fcca4cb976e3fad1e"
+  integrity sha1-dh1zt4yqosTHRatPzKTLl24/rR4=
   dependencies:
     "@types/mongodb" "*"
     "@types/node" "*"
