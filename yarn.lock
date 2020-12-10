@@ -854,10 +854,10 @@
   resolved "https://registry.npm.taobao.org/@types/minimist/download/@types/minimist-1.2.0.tgz?cache=0&sync_timestamp=1596839482756&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fminimist%2Fdownload%2F%40types%2Fminimist-1.2.0.tgz#69a23a3ad29caf0097f06eda59b361ee2f0639f6"
   integrity sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY=
 
-"@types/mongodb@*":
-  version "3.5.17"
-  resolved "https://registry.npm.taobao.org/@types/mongodb/download/@types/mongodb-3.5.17.tgz#ada9f38076fb6182b23293af029afb83f4dc8c3d"
-  integrity sha1-ranzgHb7YYKyMpOvApr7g/TcjD0=
+"@types/mongodb@*", "@types/mongodb@^3.5.27":
+  version "3.6.3"
+  resolved "https://registry.npm.taobao.org/@types/mongodb/download/@types/mongodb-3.6.3.tgz#5655af409d9e32d5d5ae9a653abf3e5f9c83eb7a"
+  integrity sha1-VlWvQJ2eMtXVrpplOr8+X5yD63o=
   dependencies:
     "@types/bson" "*"
     "@types/node" "*"
@@ -4435,10 +4435,10 @@ jws@^3.2.2:
     jwa "^1.4.1"
     safe-buffer "^5.0.1"
 
-kareem@2.3.1:
-  version "2.3.1"
-  resolved "https://registry.npm.taobao.org/kareem/download/kareem-2.3.1.tgz#def12d9c941017fabfb00f873af95e9c99e1be87"
-  integrity sha1-3vEtnJQQF/q/sA+HOvlenJnhvoc=
+kareem@2.3.2:
+  version "2.3.2"
+  resolved "https://registry.npm.taobao.org/kareem/download/kareem-2.3.2.tgz#78c4508894985b8d38a0dc15e1a8e11078f2ca93"
+  integrity sha1-eMRQiJSYW404oNwV4ajhEHjyypM=
 
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
@@ -4943,16 +4943,17 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.npm.taobao.org/mongoose-legacy-pluralize/download/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha1-O6n5H6UHtRhtOZ+0CFS/8Y+1Y+Q=
 
-mongoose@^5.10.15:
-  version "5.10.15"
-  resolved "https://registry.npm.taobao.org/mongoose/download/mongoose-5.10.15.tgz#5e559467890e0883d2a1ff0470a7467a1b47e52d"
-  integrity sha1-XlWUZ4kOCIPSof8EcKdGehtH5S0=
+mongoose@^5.11.6:
+  version "5.11.6"
+  resolved "https://registry.npm.taobao.org/mongoose/download/mongoose-5.11.6.tgz#906aa8bddddcafbd02b9c1a46600d7c0d19a0830"
+  integrity sha1-kGqovd3cr70CucGkZgDXwNGaCDA=
   dependencies:
+    "@types/mongodb" "^3.5.27"
     bson "^1.1.4"
-    kareem "2.3.1"
+    kareem "2.3.2"
     mongodb "3.6.3"
     mongoose-legacy-pluralize "1.0.2"
-    mpath "0.7.0"
+    mpath "0.8.0"
     mquery "3.2.2"
     ms "2.1.2"
     regexp-clone "1.0.0"
@@ -4960,10 +4961,10 @@ mongoose@^5.10.15:
     sift "7.0.1"
     sliced "1.0.1"
 
-mpath@0.7.0:
-  version "0.7.0"
-  resolved "https://registry.npm.taobao.org/mpath/download/mpath-0.7.0.tgz#20e8102e276b71709d6e07e9f8d4d0f641afbfb8"
-  integrity sha1-IOgQLidrcXCdbgfp+NTQ9kGvv7g=
+mpath@0.8.0:
+  version "0.8.0"
+  resolved "https://registry.npm.taobao.org/mpath/download/mpath-0.8.0.tgz#48bc1da84e75519d4d74ee6242a4a7e16b4e1997"
+  integrity sha1-SLwdqE51UZ1NdO5iQqSn4WtOGZc=
 
 mquery@3.2.2:
   version "3.2.2"
