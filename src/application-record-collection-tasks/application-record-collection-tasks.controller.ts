@@ -53,6 +53,9 @@ export class ApplicationRecordCollectionTasksController {
   @UsePipes(ValidateIdPipe)
   @Get(':id')
   async findOne(@Param('id') id: string, @User() user): Promise<ApplicationRecordCollectionTaskInfo> {
-    return this.applicationRecordCollectionTasksService.findOneByUserId(id, user.id);
+    return (this.applicationRecordCollectionTasksService.findOneByUserId(
+      id,
+      user.id,
+    ) as unknown) as ApplicationRecordCollectionTaskInfo;
   }
 }
