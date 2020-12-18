@@ -624,10 +624,10 @@
     fs-extra "9.0.1"
     pluralize "8.0.0"
 
-"@nestjs/swagger@^4.7.5":
-  version "4.7.7"
-  resolved "https://registry.npm.taobao.org/@nestjs/swagger/download/@nestjs/swagger-4.7.7.tgz#3050324e5e6d30e47d5bb45fa4c77809efe98a7e"
-  integrity sha1-MFAyTl5tMOR9W7RfpMd4Ce/pin4=
+"@nestjs/swagger@^4.7.8":
+  version "4.7.8"
+  resolved "https://registry.npm.taobao.org/@nestjs/swagger/download/@nestjs/swagger-4.7.8.tgz#4a7512263edd7d29165797bbddbf4e5763a9197e"
+  integrity sha1-SnUSJj7dfSkWV5e73b9OV2OpGX4=
   dependencies:
     "@nestjs/mapped-types" "0.1.1"
     lodash "4.17.20"
