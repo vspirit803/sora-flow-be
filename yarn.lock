@@ -633,10 +633,10 @@
     lodash "4.17.20"
     path-to-regexp "3.2.0"
 
-"@nestjs/testing@^7.5.5":
-  version "7.6.1"
-  resolved "https://registry.npm.taobao.org/@nestjs/testing/download/@nestjs/testing-7.6.1.tgz#f4017d2119ff70baa0482fd1a9291f85f250ce6a"
-  integrity sha1-9AF9IRn/cLqgSC/RqSkfhfJQzmo=
+"@nestjs/testing@^7.6.4":
+  version "7.6.4"
+  resolved "https://registry.npm.taobao.org/@nestjs/testing/download/@nestjs/testing-7.6.4.tgz#c75cd9f6aa9ba6c4f5c0e5c24520c7d0334054d7"
+  integrity sha1-x1zZ9qqbpsT1wOXCRSDH0DNAVNc=
   dependencies:
     optional "0.1.4"
     tslib "2.0.3"
@@ -6959,12 +6959,7 @@ tslib@2.0.3, tslib@>=1.9.0:
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
   integrity sha1-jgdBrEX8DCJuWKF7/D5kubxsphw=
 
-tslib@^1.8.1:
-  version "1.13.0"
-  resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
-  integrity sha1-yIHhPMcBWJTtkUhi0nZDb6mkcEM=
-
-tslib@^1.9.0:
+tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
