@@ -567,15 +567,15 @@
     lodash.set "4.3.2"
     uuid "8.3.1"
 
-"@nestjs/core@^7.6.1":
-  version "7.6.1"
-  resolved "https://registry.npm.taobao.org/@nestjs/core/download/@nestjs/core-7.6.1.tgz#3b04ac45dd158f9373650d43894cbd2ae016a694"
-  integrity sha1-OwSsRd0Vj5NzZQ1DiUy9KuAWppQ=
+"@nestjs/core@^7.6.5":
+  version "7.6.5"
+  resolved "https://registry.npm.taobao.org/@nestjs/core/download/@nestjs/core-7.6.5.tgz#93c642d1abf8d3f09f8f78c262814eaf83bc2ad6"
+  integrity sha1-k8ZC0av40/Cfj3jCYoFOr4O8KtY=
   dependencies:
     "@nuxtjs/opencollective" "0.3.2"
     fast-safe-stringify "2.0.7"
     iterare "1.2.1"
-    object-hash "2.0.3"
+    object-hash "2.1.1"
     path-to-regexp "3.2.0"
     tslib "2.0.3"
     uuid "8.3.2"
@@ -5180,10 +5180,10 @@ object-copy@^0.1.0:
     define-property "^0.2.5"
     kind-of "^3.0.3"
 
-object-hash@2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npm.taobao.org/object-hash/download/object-hash-2.0.3.tgz?cache=0&sync_timestamp=1582002911785&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fobject-hash%2Fdownload%2Fobject-hash-2.0.3.tgz#d12db044e03cd2ca3d77c0570d87225b02e1e6ea"
-  integrity sha1-0S2wROA80so9d8BXDYciWwLh5uo=
+object-hash@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.npm.taobao.org/object-hash/download/object-hash-2.1.1.tgz#9447d0279b4fcf80cff3259bf66a1dc73afabe09"
+  integrity sha1-lEfQJ5tPz4DP8yWb9modxzr6vgk=
 
 object-inspect@^1.7.0:
   version "1.7.0"
@@ -6959,12 +6959,7 @@ tslib@2.0.3, tslib@>=1.9.0:
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
   integrity sha1-jgdBrEX8DCJuWKF7/D5kubxsphw=
 
-tslib@^1.8.1:
-  version "1.13.0"
-  resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
-  integrity sha1-yIHhPMcBWJTtkUhi0nZDb6mkcEM=
-
-tslib@^1.9.0:
+tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
