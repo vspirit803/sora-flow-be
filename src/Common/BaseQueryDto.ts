@@ -63,7 +63,7 @@ export class BaseQueryDto {
   @IsOptional()
   @ValidateNested()
   @Expose()
-  @Transform((value) => {
+  @Transform(({ value }) => {
     let key = 'createdAt',
       order = 'DESC';
     try {
@@ -82,7 +82,7 @@ export class BaseQueryDto {
   @IsOptional()
   @ValidateNested()
   @Expose()
-  @Transform((value) => {
+  @Transform(({ value }) => {
     let page = 1,
       size = 20;
     try {
