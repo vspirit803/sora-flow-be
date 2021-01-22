@@ -646,10 +646,10 @@
     "@types/jsonwebtoken" "8.5.0"
     jsonwebtoken "8.5.1"
 
-"@nestjs/mapped-types@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.npm.taobao.org/@nestjs/mapped-types/download/@nestjs/mapped-types-0.2.0.tgz#f4a688a40bcd2a51dcc6309b55e7278c7d166d35"
-  integrity sha1-9KaIpAvNKlHcxjCbVecnjH0WbTU=
+"@nestjs/mapped-types@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.npm.taobao.org/@nestjs/mapped-types/download/@nestjs/mapped-types-0.3.0.tgz#1dcf178c198e948c548ca803850e2eba639900d4"
+  integrity sha1-Hc8XjBmOlIxUjKgDhQ4uumOZANQ=
 
 "@nestjs/mongoose@^7.1.2":
   version "7.2.2"
@@ -692,12 +692,12 @@
     fs-extra "9.0.1"
     pluralize "8.0.0"
 
-"@nestjs/swagger@^4.7.5":
-  version "4.7.11"
-  resolved "https://registry.npm.taobao.org/@nestjs/swagger/download/@nestjs/swagger-4.7.11.tgz#75b1dcbdf24da6a6270cf326cc9f5a2dced3e8e0"
-  integrity sha1-dbHcvfJNpqYnDPMmzJ9aLc7T6OA=
+"@nestjs/swagger@^4.7.12":
+  version "4.7.12"
+  resolved "https://registry.npm.taobao.org/@nestjs/swagger/download/@nestjs/swagger-4.7.12.tgz#8615bc1680ca343981a57c9d46a640fc6021611b"
+  integrity sha1-hhW8FoDKNDmBpXydRqZA/GAhYRs=
   dependencies:
-    "@nestjs/mapped-types" "0.2.0"
+    "@nestjs/mapped-types" "0.3.0"
     lodash "4.17.20"
     path-to-regexp "3.2.0"
 
