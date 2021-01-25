@@ -6865,10 +6865,10 @@ superagent@^6.1.0:
     readable-stream "^3.6.0"
     semver "^7.3.2"
 
-supertest@^6.0.1:
-  version "6.1.1"
-  resolved "https://registry.npm.taobao.org/supertest/download/supertest-6.1.1.tgz#4fe6ddfdad4ef3eb72926046c6c625217771d9ae"
-  integrity sha1-T+bd/a1O8+tykmBGxsYlIXdx2a4=
+supertest@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.npm.taobao.org/supertest/download/supertest-6.1.2.tgz#1679c234b139eed93911c185b67f689348fc2453"
+  integrity sha1-FnnCNLE57tk5EcGFtn9ok0j8JFM=
   dependencies:
     methods "^1.1.2"
     superagent "^6.1.0"
