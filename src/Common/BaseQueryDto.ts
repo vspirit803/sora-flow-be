@@ -87,8 +87,8 @@ export class BaseQueryDto {
       size = 20;
     try {
       const { page: realPage = 1, size: realSize = 20 } = JSON.parse(value);
-      page = realPage;
-      size = realSize;
+      page = Math.max(1, Math.floor(parseInt(realPage)));
+      size = Math.max(10, Math.floor(parseInt(realSize)));
     } catch (error) {}
     const pagination = new Pagination();
     pagination.page = page;

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { findItemsWrapper } from 'src/utils';
 
 import { CreateOperateLogDto, QueryOperateLogDto } from './dto';
 import { OperateLog } from './operate-log.schema';
@@ -27,10 +28,7 @@ export class OperateLogsService {
       sort: { key, order },
       ...others
     } = query;
-    return this.operateLogModel
-      .find(others)
-      .sort({ [key]: order === 'DESC' ? -1 : 1 })
-      .skip((page - 1) * size)
-      .limit(size);
+
+    return findItemsWrapper(this.operateLogModel, others, page, size, { [key]: order === 'DESC' ? -1 : 1 });
   }
 }
