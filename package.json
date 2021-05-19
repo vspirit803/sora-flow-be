@@ -22,7 +22,7 @@
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "dependencies": {
-    "@nestjs/common": "^7.5.5",
+    "@nestjs/common": "^7.6.17",
     "@nestjs/config": "^0.6.1",
     "@nestjs/core": "^7.6.1",
     "@nestjs/jwt": "^7.2.0",
