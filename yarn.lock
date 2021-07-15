@@ -646,10 +646,10 @@
     "@types/jsonwebtoken" "8.5.0"
     jsonwebtoken "8.5.1"
 
-"@nestjs/mapped-types@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.npm.taobao.org/@nestjs/mapped-types/download/@nestjs/mapped-types-0.2.0.tgz#f4a688a40bcd2a51dcc6309b55e7278c7d166d35"
-  integrity sha1-9KaIpAvNKlHcxjCbVecnjH0WbTU=
+"@nestjs/mapped-types@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.nlark.com/@nestjs/mapped-types/download/@nestjs/mapped-types-1.0.0.tgz#52a0441795f6da8144a35970d3ebc19281f31cfd"
+  integrity sha1-UqBEF5X22oFEo1lw0+vBkoHzHP0=
 
 "@nestjs/mongoose@^7.1.2":
   version "7.2.2"
@@ -692,13 +692,13 @@
     fs-extra "9.0.1"
     pluralize "8.0.0"
 
-"@nestjs/swagger@^4.7.5":
-  version "4.7.11"
-  resolved "https://registry.npm.taobao.org/@nestjs/swagger/download/@nestjs/swagger-4.7.11.tgz#75b1dcbdf24da6a6270cf326cc9f5a2dced3e8e0"
-  integrity sha1-dbHcvfJNpqYnDPMmzJ9aLc7T6OA=
+"@nestjs/swagger@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.nlark.com/@nestjs/swagger/download/@nestjs/swagger-5.0.3.tgz#61d199483014c7d2f5601d2d9136455914fb63ed"
+  integrity sha1-YdGZSDAUx9L1YB0tkTZFWRT7Y+0=
   dependencies:
-    "@nestjs/mapped-types" "0.2.0"
-    lodash "4.17.20"
+    "@nestjs/mapped-types" "1.0.0"
+    lodash "4.17.21"
     path-to-regexp "3.2.0"
 
 "@nestjs/testing@^7.5.5":
@@ -4874,10 +4874,10 @@ lodash.toarray@^4.4.0:
   resolved "https://registry.npm.taobao.org/lodash.toarray/download/lodash.toarray-4.4.0.tgz#24c4bfcd6b2fba38bfd0594db1179d8e9b656561"
   integrity sha1-JMS/zWsvuji/0FlNsRedjptlZWE=
 
-lodash@4.17.20, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20:
-  version "4.17.20"
-  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.20.tgz?cache=0&sync_timestamp=1597336196663&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash%2Fdownload%2Flodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
-  integrity sha1-tEqbYpe8tpjxxRo1RaKzs2jVnFI=
+lodash@4.17.21, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20:
+  version "4.17.21"
+  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=
 
 log-symbols@^4.0.0:
   version "4.0.0"
